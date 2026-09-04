@@ -62,6 +62,16 @@ nav.views button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;tex
 nav.views button:first-child{padding-left:0}
 nav.views button.on{color:var(--ink);border-bottom-color:var(--ink)}
 nav.views button:hover{color:var(--ink)}
+.navtools{margin-left:auto;display:flex;gap:8px;align-items:flex-start}
+.pdf-btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:8px 12px;margin-bottom:8px}
+.pdf-btn:hover{border-color:var(--oak);color:var(--ink)}
+/* hamburger, phones only */
+.navtoggle{display:none;align-items:center;gap:10px;width:100%;padding:11px 12px;margin:2px 0 6px;background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.navtoggle .bars{display:inline-flex;flex-direction:column;gap:3px;width:16px;flex-shrink:0}
+.navtoggle .bars i{display:block;height:1.5px;background:var(--ink-2);transition:transform .16s ease,opacity .16s ease}
+.navtoggle[aria-expanded="true"] .bars i:nth-child(1){transform:translateY(4.5px) rotate(45deg)}
+.navtoggle[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
+.navtoggle[aria-expanded="true"] .bars i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg)}
 .scenario-btn{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:8px 14px;margin-bottom:8px}
 .scenario-btn:hover{border-color:var(--oak);color:var(--ink)}
 .scenario-btn::before{content:"";display:inline-block;width:6px;height:6px;background:var(--goldenrod);border-radius:50%;margin-right:8px;vertical-align:1px}
@@ -333,6 +343,94 @@ footer div+div{margin-top:6px}
 
 /* loading */
 #loading{padding:80px 0;text-align:center;color:var(--ink-3);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ------------------------------------------------------------------ phones */
+@media (max-width:1000px){ .strip.five .cell:nth-child(5){grid-column:span 2} }
+@media (max-width:720px){
+  .wrap{padding:0 14px}
+  .mast{padding:16px 0 0}
+  .mast .top{flex-direction:column;align-items:flex-start;gap:12px}
+  .mast .stamp{text-align:left}
+  .navtoggle{display:flex}
+  nav.views{display:none}
+  nav.views.open{display:flex;flex-direction:column;align-items:stretch;gap:0;margin:0 0 10px;border:1px solid var(--rule-2);border-radius:2px;background:var(--ground)}
+  nav.views.open button[data-view]{width:100%;text-align:left;padding:13px 14px;margin:0;border-bottom:1px solid var(--rule)}
+  nav.views.open button[data-view].on{background:var(--surface)}
+  nav.views.open .navtools{margin:0;display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px}
+  nav.views.open .navtools button{margin:0;flex:1 1 0;padding:9px 4px;font-size:10.5px;letter-spacing:.04em;text-align:center;white-space:nowrap}
+  nav.views.open .scenario-btn::before{margin-right:5px}
+  .datum{margin-top:0}
+  .who{padding-top:6px}
+  .viewhead h2{font-size:34px}
+  /* the prairie line stays legible by scrolling rather than shrinking */
+  .prairie{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .prairie svg{min-width:660px}
+  .thresholds{gap:12px 14px}
+  .thresholds input{width:100%;min-width:0}
+  .thresholds label{flex:1 1 130px;min-width:0}
+  .thresholds .note{flex:1 1 100%;max-width:none}
+  /* The Morning folds from a table into one card per community */
+  .morningscroll{overflow:visible}
+  #morning-table,#morning-table tbody{display:block;width:100%}
+  #morning-table thead{display:none}
+  #morning-table tr.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 12px;border:1px solid var(--rule);padding:13px 14px;margin:0 0 10px;background:var(--ground)}
+  #morning-table td{display:block;border:none;padding:0}
+  #morning-table td:first-child{grid-column:1/-1}
+  #morning-table td[data-l]{font-family:var(--mono);font-size:13px;color:var(--ink-2);text-align:left}
+  #morning-table td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-bottom:2px}
+  #morning-table td.why{grid-column:1/-1;margin-top:2px;padding-top:9px;border-top:1px solid var(--rule)}
+  .vh-right{gap:10px}
+  .drawer{width:100%;padding:20px 16px 40px}
+  .mv{padding:3vh 12px}
+  .modal{padding:22px 16px 28px;max-height:94vh}
+  .toastwrap{left:12px;right:12px;bottom:12px}
+  .toast{min-width:0}
+  .strip.five .cell:nth-child(5){grid-column:1/-1}
+}
+
+/* ------------------------------------------------------------------ print: the view you are on, as slides */
+.printcover{display:none}
+@media print{
+  @page{size:297mm 167mm;margin:13mm}
+  :root{--ground:#fff}
+  html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:none;padding:0}
+  /* chrome that is not part of the story */
+  .mast,nav.views,.navtoggle,.who,.datum,.thresholds,footer,#loading,
+  .ov,.mv,.toastwrap,.tip,.crumbs,.vh-send,[data-send-why],[data-send-inline],
+  .sentlog,.pdf-btn,.scenario-btn{display:none !important}
+  .strip .cell.tile .l::after{content:none}
+  /* the title card */
+  .printcover{display:flex;flex-direction:column;justify-content:center;min-height:139mm;break-after:page;page-break-after:always}
+  .pc-brand{font-family:var(--mono);font-size:15pt;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+  .pc-brand span{color:var(--ink-3);letter-spacing:.34em}
+  .pc-title{font-size:40pt;font-weight:300;line-height:1.05;margin:10mm 0 5mm}
+  .pc-lede{font-size:12pt;font-weight:300;color:var(--ink-2);max-width:60ch}
+  .pc-meta{margin-top:9mm;font-family:var(--mono);font-size:9.5pt;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:18px}
+  .pc-foot{margin-top:auto;font-size:8.5pt;color:var(--ink-4)}
+  /* the strap that repeats on every page after the cover */
+  /* No running header or footer: Chromium places a print-fixed block inconsistently from page
+     to page, so the title card carries the identity and the slides stay clean. */
+  /* one idea per page */
+  .view.on>.wrap>.viewhead{break-after:avoid;page-break-after:avoid}
+  .strip,.panel,.whyline,.ladder,.regionmap,.unitgrid,.facts,.grid2>.panel,.morningscroll{break-inside:avoid;page-break-inside:avoid}
+  /* panels flow and pack; only the cover and the six numbers claim a page of their own,
+     because a forced break per panel leaves half-empty slides */
+  .panel,.whyline{break-before:auto}
+  .panel{margin-bottom:9mm}
+  .strip{break-after:page;page-break-after:always;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .strip .cell{padding:7mm 6mm}
+  .strip .n{font-size:30pt}
+  .strip .l{font-size:11pt}
+  /* tables carry their heading onto each page */
+  thead{display:table-header-group}
+  tr,img,svg{break-inside:avoid;page-break-inside:avoid}
+  .tscroll{overflow:visible}
+  table{width:100%;font-size:9pt}
+  a{text-decoration:none;color:inherit}
+  h2{font-size:26pt}
+  .lede{font-size:11pt}
+}
 </style>
 </head>
 <body>
@@ -348,13 +446,18 @@ footer div+div{margin-top:6px}
       </div>
       <div class="stamp"><b id="stamp-date"></b> · 6:00 AM refresh<br><span id="stamp-who">Every community</span><span class="datanote" id="stamp-data"></span><br><button class="sentlog hidden" id="sent-log-btn" type="button">Sent <b id="sent-count">0</b></button></div>
     </div>
-    <nav class="views" aria-label="Views">
+    <button class="navtoggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="views-nav"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="navtoggle-label" id="nav-toggle-label">The Morning</span></button>
+    <nav class="views" id="views-nav" aria-label="Views">
       <button data-view="morning" class="on">The Morning</button>
       <button data-view="community">The Community</button>
       <button data-view="unit">The Unit</button>
       <button data-view="market">The Market</button>
       <button data-view="calendar">The Calendar</button>
-      <button class="scenario-btn" id="scenario-btn" type="button">Scenario</button>
+      <span class="navtools">
+        <button class="scenario-btn" id="scenario-btn" type="button">Scenario</button>
+        <button class="pdf-btn" id="pdf-btn" type="button" title="Save the page you are on as a PDF">PDF</button>
+        <button class="pdf-btn" id="pptx-btn" type="button" title="Build a slide deck from the page you are on">PPTX</button>
+      </span>
     </nav>
     <div class="datum"></div>
     <div class="who">
@@ -371,6 +474,15 @@ footer div+div{margin-top:6px}
 
 <div id="loading">Reading the portfolio</div>
 
+<!-- print only: the title card, and the strap that repeats on every page -->
+<div class="printcover" aria-hidden="true">
+  <div class="pc-brand">Kettle Moraine <span>Residential</span></div>
+  <div class="pc-title" id="pc-title">The Morning</div>
+  <div class="pc-lede" id="pc-lede"></div>
+  <div class="pc-meta"><span id="pc-date"></span><span id="pc-who"></span></div>
+  <div class="pc-foot">Kettle Moraine Residential is an invented company and every figure is synthetic, seeded once.</div>
+</div>
+
 <main id="main" class="hidden">
   <section class="view on" id="v-morning"><div class="wrap">
     <div class="viewhead">
@@ -380,7 +492,7 @@ footer div+div{margin-top:6px}
     <div class="strip" id="strip"></div>
     <div class="prairie" id="prairie"></div>
     <div class="thresholds" id="thresholds"></div>
-    <div class="tscroll"><table id="morning-table"></table></div>
+    <div class="tscroll morningscroll"><table id="morning-table"></table></div>
     <p class="note" style="font-size:12.5px;color:var(--ink-3);margin-top:10px">Communities with nothing above threshold sit at the bottom, and there are supposed to be a lot of them. Exposure counts units on notice and vacant, less pre-leased, over the next sixty days. Delinquency is the ledger balance as a share of this month's billed rent.</p>
   </div></section>
 
@@ -670,6 +782,9 @@ function go(hash) {
   VIEW = v;
   $$('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   $$('section.view').forEach(s => s.classList.toggle('on', s.id === 'v-' + v));
+  const onBtn = $$('nav.views button').filter(b => b.dataset.view === v)[0];
+  const ntl = $('#nav-toggle-label'); if (ntl && onBtn) ntl.textContent = onBtn.textContent;
+  closeNav();
   if (v === 'community') renderCommunity(CUR_C, CUR_FILTER);
   if (v === 'unit') { if (CUR_U) renderUnit(CUR_U); else if (CUR_C) renderUnitPicker(CUR_C); else renderUnitGrid(); }
   if (v === 'market') renderMarket();
@@ -809,7 +924,8 @@ function renderMorning() {
   let html = '<thead><tr><th>Community</th><th>Market</th><th class="r">Units</th><th class="r">Occ.</th><th class="r">Exp. 60d</th><th class="r">Delinq.</th><th>Why it is on the list</th></tr></thead><tbody>';
   rows.forEach(({c, s, r}) => {
     html += '<tr class="row" data-go="community/' + c.community_id + '"><td><span class="name">' + esc(c.name) + '</span><div class="sub">' + esc(c.city) + ' · ' + esc(c.regional) + (c.lease_up === 1 ? ' · lease-up, week ' + c.lease_up_weeks_open : '') + '</div></td>';
-    html += '<td>' + esc(c.market) + '</td><td class="num r">' + fmt(s.units) + '</td><td class="num r">' + s.occPct.toFixed(1) + '%</td><td class="num r">' + s.expPct.toFixed(1) + '%</td><td class="num r">' + s.dqPct.toFixed(1) + '%</td>';
+    // data-l labels the figure when the table folds into cards on a phone
+    html += '<td data-l="Market">' + esc(c.market) + '</td><td class="num r" data-l="Units">' + fmt(s.units) + '</td><td class="num r" data-l="Occ.">' + s.occPct.toFixed(1) + '%</td><td class="num r" data-l="Exp. 60d">' + s.expPct.toFixed(1) + '%</td><td class="num r" data-l="Delinq.">' + s.dqPct.toFixed(1) + '%</td>';
     html += '<td class="why">' + (r.length ? r.map(x => '<span class="r"><span class="chip ' + x.level + '">' + esc(x.kind) + '</span>' + x.html + '</span>').join(' · ') : '<span class="chip clear">Clear</span>nothing above threshold' + (c.lease_up === 1 ? '; lease-up ' + (s.luBehind <= 0 ? Math.abs(s.luBehind) + ' leases ahead of' : s.luBehind + ' behind') + ' the curve' : s.moveInsWeek ? '; ' + s.moveInsWeek + ' move-in' + (s.moveInsWeek > 1 ? 's' : '') + ' this week' + (s.turnLate.length ? '' : ', units ready') : '')) + '</td></tr>';
   });
   $('#morning-table').innerHTML = html + '</tbody>';
@@ -1439,6 +1555,32 @@ function refreshView() {
   else if (VIEW === 'calendar') renderCalendar();
 }
 
+// -- the hamburger, phones only (the nav is always open on a wide screen)
+function closeNav() {
+  const n = $('#views-nav'), t = $('#nav-toggle');
+  if (n) n.classList.remove('open');
+  if (t) t.setAttribute('aria-expanded', 'false');
+}
+function toggleNav() {
+  const n = $('#views-nav'), t = $('#nav-toggle');
+  const open = !n.classList.contains('open');
+  n.classList.toggle('open', open);
+  t.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+// -- save the view you are on as a PDF, using the browser's own print to PDF
+function printView() {
+  const head = $('.view.on .viewhead');
+  const title = head && head.querySelector('h2') ? head.querySelector('h2').textContent : 'Portfolio Outlook';
+  const lede = head && head.querySelector('.lede') ? head.querySelector('.lede').textContent : '';
+  $('#pc-title').textContent = title;
+  $('#pc-lede').textContent = lede;
+  $('#pc-date').textContent = fmtRealDate();
+  $('#pc-who').textContent = $('#stamp-who') ? $('#stamp-who').textContent : '';
+  closeDrawer(); closeModal(); closeNav();
+  window.print();
+}
+
 // -- wire up all the chrome once, at boot
 function bindChrome() {
   document.addEventListener('click', e => {
@@ -1449,14 +1591,20 @@ function bindChrome() {
     const back = e.target.closest('[data-drawerback]'); if (back) { closeDrawer(); return; }
     if (e.target.closest('#drawer-close') || e.target === $('#drawer-overlay')) { closeDrawer(); return; }
     if (e.target.closest('#modal-close') || e.target === $('#modal-overlay')) { closeModal(); return; }
-    if (e.target.closest('#scenario-btn')) { renderScenarioModal(); return; }
+    if (e.target.closest('#nav-toggle')) { toggleNav(); return; }
+    if (e.target.closest('#scenario-btn')) { closeNav(); renderScenarioModal(); return; }
+    if (e.target.closest('#pdf-btn')) { printView(); return; }
+    if (e.target.closest('#pptx-btn')) { downloadPptx(); return; }
     if (e.target.closest('#sent-log-btn')) { renderSentLogPanel(); return; }
+    if (!e.target.closest('nav.views') && !e.target.closest('#nav-toggle')) closeNav();
     const dc = e.target.closest('[data-drawerclose]'); if (dc && dc.hasAttribute('data-go')) { setTimeout(closeDrawer, 0); }
   });
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     const p = document.getElementById('cs-to-panel');
     if (p && !p.classList.contains('hidden')) { closeRecipientDD(); return; }
+    const n = document.getElementById('views-nav');
+    if (n && n.classList.contains('open')) { closeNav(); return; }
     closeDrawer(); closeModal();
   });
 }
@@ -1497,6 +1645,408 @@ function renderWho() {
   document.addEventListener('click', e => { if (!e.target.closest('#who-dd')) closeWhoDD(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWhoDD(); });
 }
+
+// ------------------------------------------------------------------ PPTX export
+// A .pptx is a zip of XML parts. No library: a store-only zip writer plus the
+// handful of OOXML parts PowerPoint, Keynote and Google Slides all accept.
+// Titles and numbers go in as real text boxes so a slide can be edited after
+// the fact; the charts go in as pictures rasterized from the page's own SVG.
+
+const EMU = v => Math.round(v * 914400);          // inches to EMU
+const SLIDE_W = EMU(13.333), SLIDE_H = EMU(7.5);  // 16:9
+
+// -- store-only zip (no compression: simple, and the payload is already PNG)
+const CRC_TABLE = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+  return t;
+})();
+function crc32(buf) {
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < buf.length; i++) c = CRC_TABLE[(c ^ buf[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function zipStore(files) {
+  const enc = new TextEncoder();
+  const parts = [], central = [];
+  let offset = 0;
+  files.forEach(f => {
+    const name = enc.encode(f.name);
+    const data = typeof f.data === 'string' ? enc.encode(f.data) : f.data;
+    const crc = crc32(data);
+    const lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0, true);
+    lh.setUint16(8, 0, true); lh.setUint16(10, 0, true); lh.setUint16(12, 0, true);
+    lh.setUint32(14, crc, true); lh.setUint32(18, data.length, true); lh.setUint32(22, data.length, true);
+    lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+    parts.push(new Uint8Array(lh.buffer), name, data);
+    const ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true);
+    ch.setUint16(8, 0, true); ch.setUint16(10, 0, true); ch.setUint16(12, 0, true); ch.setUint16(14, 0, true);
+    ch.setUint32(16, crc, true); ch.setUint32(20, data.length, true); ch.setUint32(24, data.length, true);
+    ch.setUint16(28, name.length, true); ch.setUint16(30, 0, true); ch.setUint16(32, 0, true);
+    ch.setUint16(34, 0, true); ch.setUint16(36, 0, true); ch.setUint32(38, 0, true);
+    ch.setUint32(42, offset, true);
+    central.push(new Uint8Array(ch.buffer), name);
+    offset += 30 + name.length + data.length;
+  });
+  const cdStart = offset;
+  let cdLen = 0; central.forEach(p => cdLen += p.length);
+  const eo = new DataView(new ArrayBuffer(22));
+  eo.setUint32(0, 0x06054b50, true); eo.setUint16(4, 0, true); eo.setUint16(6, 0, true);
+  eo.setUint16(8, files.length, true); eo.setUint16(10, files.length, true);
+  eo.setUint32(12, cdLen, true); eo.setUint32(16, cdStart, true); eo.setUint16(20, 0, true);
+  const all = parts.concat(central, [new Uint8Array(eo.buffer)]);
+  let total = 0; all.forEach(p => total += p.length);
+  const out = new Uint8Array(total);
+  let o = 0; all.forEach(p => { out.set(p, o); o += p.length; });
+  return out;
+}
+
+// -- rasterize one of the page's own SVGs, with the styles and faces it needs
+let FONT_CSS = null;
+function fontCss() {
+  if (FONT_CSS !== null) return FONT_CSS;
+  let css = '';
+  const styles = document.querySelectorAll('style');
+  for (let i = 0; i < styles.length; i++) {
+    const t = styles[i].textContent;
+    const m = t.match(/@font-face\{[^}]*\}/g);
+    if (m) css += m.join('');
+  }
+  FONT_CSS = css;
+  return css;
+}
+const PAINT = ['fill', 'stroke', 'stroke-width', 'stroke-dasharray', 'stroke-linecap', 'opacity',
+  'fill-opacity', 'stroke-opacity', 'font-family', 'font-size', 'font-weight', 'letter-spacing', 'text-anchor', 'dominant-baseline'];
+function inlineStyles(src, dst) {
+  // walk both trees together: the clone has no stylesheet, so bake the computed paint in
+  const cs = getComputedStyle(src);
+  let decl = '';
+  PAINT.forEach(p => { const v = cs.getPropertyValue(p); if (v && v !== 'none' || p === 'fill') decl += p + ':' + v + ';'; });
+  dst.setAttribute('style', decl);
+  const a = src.children, b = dst.children;
+  for (let i = 0; i < a.length; i++) inlineStyles(a[i], b[i]);
+}
+function svgToPng(svg, scale) {
+  return new Promise((resolve, reject) => {
+    const box = svg.getBoundingClientRect();
+    const w = Math.max(1, Math.round(box.width)), h = Math.max(1, Math.round(box.height));
+    const clone = svg.cloneNode(true);
+    inlineStyles(svg, clone);
+    clone.setAttribute('width', w); clone.setAttribute('height', h);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    const st = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+    st.textContent = fontCss();
+    clone.insertBefore(st, clone.firstChild);
+    const src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(new XMLSerializer().serializeToString(clone))));
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = w * scale; c.height = h * scale;
+      const g = c.getContext('2d');
+      g.fillStyle = '#F8F5EF'; g.fillRect(0, 0, c.width, c.height);
+      g.drawImage(img, 0, 0, c.width, c.height);
+      const b64 = c.toDataURL('image/png').split(',')[1];
+      const bin = atob(b64); const u8 = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      resolve({bytes: u8, w: w, h: h});
+    };
+    img.onerror = () => reject(new Error('could not rasterize a chart'));
+    img.src = src;
+  });
+}
+
+// -- OOXML fragments
+const X = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const HEXOF = {ink: '1A1712', ink2: '5C4A30', ink3: '6F6250', ink4: '9A8D76', rule: 'D9D1BE',
+  ground: 'F8F5EF', surface: 'F0EBE0', hot: 'B5533E', watch: 'A68B3C', clear: '3B7A6B'};
+let SHAPE_ID = 1;
+function tx(text, o) {
+  o = o || {};
+  const id = ++SHAPE_ID;
+  const runs = String(text).split('\n').map(line =>
+    '<a:p><a:pPr algn="' + (o.align || 'l') + '"/>' + (line ? '<a:r><a:rPr lang="en-US" sz="' + (o.size || 1400) + '"' +
+    (o.bold ? ' b="1"' : '') + ' spc="' + (o.spc || 0) + '" dirty="0"><a:solidFill><a:srgbClr val="' + (o.color || HEXOF.ink) + '"/></a:solidFill>' +
+    '<a:latin typeface="' + (o.mono ? 'DM Mono' : 'DM Sans') + '"/></a:rPr><a:t>' + X(line) + '</a:t></a:r>' : '') + '</a:p>').join('');
+  return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="t' + id + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>' +
+    '<p:spPr><a:xfrm><a:off x="' + o.x + '" y="' + o.y + '"/><a:ext cx="' + o.w + '" cy="' + o.h + '"/></a:xfrm>' +
+    '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr>' +
+    '<p:txBody><a:bodyPr wrap="square" anchor="' + (o.anchor || 't') + '"><a:normAutofit/></a:bodyPr><a:lstStyle/>' + runs + '</p:txBody></p:sp>';
+}
+function rect(o) {
+  const id = ++SHAPE_ID;
+  return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="r' + id + '"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>' +
+    '<p:spPr><a:xfrm><a:off x="' + o.x + '" y="' + o.y + '"/><a:ext cx="' + o.w + '" cy="' + o.h + '"/></a:xfrm>' +
+    '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom>' +
+    (o.fill ? '<a:solidFill><a:srgbClr val="' + o.fill + '"/></a:solidFill>' : '<a:noFill/>') +
+    (o.line ? '<a:ln w="9525"><a:solidFill><a:srgbClr val="' + o.line + '"/></a:solidFill></a:ln>' : '<a:ln><a:noFill/></a:ln>') +
+    '</p:spPr><p:txBody><a:bodyPr/><a:lstStyle/><a:p/></p:txBody></p:sp>';
+}
+function pic(rId, o) {
+  const id = ++SHAPE_ID;
+  return '<p:pic><p:nvPicPr><p:cNvPr id="' + id + '" name="p' + id + '"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>' +
+    '<p:blipFill><a:blip r:embed="' + rId + '"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>' +
+    '<p:spPr><a:xfrm><a:off x="' + o.x + '" y="' + o.y + '"/><a:ext cx="' + o.w + '" cy="' + o.h + '"/></a:xfrm>' +
+    '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>';
+}
+function slideXml(shapes) {
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">' +
+    '<p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="' + HEXOF.ground + '"/></a:solidFill><a:effectLst/></p:bgPr></p:bg>' +
+    '<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>' +
+    '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>' +
+    shapes + '</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>';
+}
+
+// -- the fixed parts every deck needs
+const CLRS = ['DK1', 'LT1', 'DK2', 'LT2', 'ACCENT1', 'ACCENT2', 'ACCENT3', 'ACCENT4', 'ACCENT5', 'ACCENT6'];
+function themeXml() {
+  const vals = [HEXOF.ink, HEXOF.ground, HEXOF.ink2, HEXOF.surface, HEXOF.hot, HEXOF.watch, HEXOF.clear, HEXOF.ink3, HEXOF.ink4, HEXOF.rule];
+  let scheme = '';
+  CLRS.forEach((n, i) => {
+    const tag = n === 'DK1' ? 'dk1' : n === 'LT1' ? 'lt1' : n === 'DK2' ? 'dk2' : n === 'LT2' ? 'lt2' : 'accent' + (i - 3);
+    scheme += '<a:' + tag + '><a:srgbClr val="' + vals[i] + '"/></a:' + tag + '>';
+  });
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Taliesin Prairie">' +
+    '<a:themeElements><a:clrScheme name="Taliesin">' + scheme +
+    '<a:hlink><a:srgbClr val="' + HEXOF.ink2 + '"/></a:hlink><a:folHlink><a:srgbClr val="' + HEXOF.ink3 + '"/></a:folHlink></a:clrScheme>' +
+    '<a:fontScheme name="Taliesin"><a:majorFont><a:latin typeface="DM Sans"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont>' +
+    '<a:minorFont><a:latin typeface="DM Sans"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont></a:fontScheme>' +
+    '<a:fmtScheme name="Taliesin">' +
+    '<a:fillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:fillStyleLst>' +
+    '<a:lnStyleLst><a:ln w="9525"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:ln><a:ln w="9525"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:ln><a:ln w="9525"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:ln></a:lnStyleLst>' +
+    '<a:effectStyleLst><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle></a:effectStyleLst>' +
+    '<a:bgFillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:bgFillStyleLst>' +
+    '</a:fmtScheme></a:themeElements><a:objectDefaults/><a:extraClrSchemeLst/></a:theme>';
+}
+const MASTER_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+  '<p:sldMaster xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">' +
+  '<p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="' + HEXOF.ground + '"/></a:solidFill><a:effectLst/></p:bgPr></p:bg>' +
+  '<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>' +
+  '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>' +
+  '</p:spTree></p:cSld><p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/>' +
+  '<p:sldLayoutIdLst><p:sldLayoutId id="2147483649" r:id="rId1"/></p:sldLayoutIdLst></p:sldMaster>';
+const LAYOUT_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+  '<p:sldLayout xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" type="blank" preserve="1">' +
+  '<p:cSld name="Blank"><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>' +
+  '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>' +
+  '</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sldLayout>';
+
+// -- assemble the package
+function packDeck(slides, media) {
+  // slides: [xml]; media: [{name, bytes, slide}]  (slide = 1-based index it belongs to)
+  const files = [];
+  let ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+    '<Default Extension="xml" ContentType="application/xml"/>' +
+    '<Default Extension="png" ContentType="image/png"/>' +
+    '<Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>' +
+    '<Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>' +
+    '<Override PartName="/ppt/slideLayouts/slideLayout1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideLayout+xml"/>' +
+    '<Override PartName="/ppt/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>';
+  slides.forEach((s, i) => ct += '<Override PartName="/ppt/slides/slide' + (i + 1) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>');
+  ct += '</Types>';
+  files.push({name: '[Content_Types].xml', data: ct});
+  files.push({name: '_rels/.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/></Relationships>'});
+
+  let sldIds = '', presRels = '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="slideMasters/slideMaster1.xml"/>';
+  slides.forEach((s, i) => {
+    const rid = 'rId' + (i + 2);
+    sldIds += '<p:sldId id="' + (256 + i) + '" r:id="' + rid + '"/>';
+    presRels += '<Relationship Id="' + rid + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide' + (i + 1) + '.xml"/>';
+  });
+  presRels += '<Relationship Id="rId' + (slides.length + 2) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/>';
+  files.push({name: 'ppt/presentation.xml', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<p:presentation xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" saveSubsetFonts="1">' +
+    '<p:sldMasterIdLst><p:sldMasterId id="2147483648" r:id="rId1"/></p:sldMasterIdLst>' +
+    '<p:sldIdLst>' + sldIds + '</p:sldIdLst>' +
+    '<p:sldSz cx="' + SLIDE_W + '" cy="' + SLIDE_H + '"/><p:notesSz cx="' + SLIDE_H + '" cy="' + SLIDE_W + '"/></p:presentation>'});
+  files.push({name: 'ppt/_rels/presentation.xml.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + presRels + '</Relationships>'});
+  files.push({name: 'ppt/theme/theme1.xml', data: themeXml()});
+  files.push({name: 'ppt/slideMasters/slideMaster1.xml', data: MASTER_XML});
+  files.push({name: 'ppt/slideMasters/_rels/slideMaster1.xml.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="../theme/theme1.xml"/></Relationships>'});
+  files.push({name: 'ppt/slideLayouts/slideLayout1.xml', data: LAYOUT_XML});
+  files.push({name: 'ppt/slideLayouts/_rels/slideLayout1.xml.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="../slideMasters/slideMaster1.xml"/></Relationships>'});
+  slides.forEach((s, i) => {
+    files.push({name: 'ppt/slides/slide' + (i + 1) + '.xml', data: s});
+    let rels = '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>';
+    media.filter(m => m.slide === i + 1).forEach(m => {
+      rels += '<Relationship Id="' + m.rId + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/' + m.name + '"/>';
+    });
+    files.push({name: 'ppt/slides/_rels/slide' + (i + 1) + '.xml.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + rels + '</Relationships>'});
+  });
+  media.forEach(m => files.push({name: 'ppt/media/' + m.name, data: m.bytes}));
+  return zipStore(files);
+}
+
+// -- build the deck from whatever view is open, using the page's own numbers
+const M = EMU(0.72);                      // side margin
+const CONTENT_W = SLIDE_W - M * 2;
+function coverSlide(title, lede) {
+  let s = tx('KETTLE MORAINE  RESIDENTIAL', {x: M, y: EMU(1.5), w: CONTENT_W, h: EMU(0.5), size: 1500, spc: 320, mono: true, color: HEXOF.ink});
+  s += tx(title, {x: M, y: EMU(2.35), w: CONTENT_W, h: EMU(1.2), size: 4000, color: HEXOF.ink});
+  if (lede) s += tx(lede, {x: M, y: EMU(3.7), w: EMU(8), h: EMU(1.2), size: 1300, color: HEXOF.ink2});
+  s += tx(fmtRealDate().toUpperCase() + '     ' + ($('#stamp-who') ? $('#stamp-who').textContent.toUpperCase() : ''),
+    {x: M, y: EMU(5.1), w: CONTENT_W, h: EMU(0.4), size: 950, spc: 120, mono: true, color: HEXOF.ink3});
+  s += tx('Kettle Moraine Residential is an invented company and every figure is synthetic, seeded once.',
+    {x: M, y: EMU(6.5), w: CONTENT_W, h: EMU(0.4), size: 900, color: HEXOF.ink4});
+  return slideXml(s);
+}
+function numbersSlide(heading, cells) {
+  // cells: [{n, l, status}] laid out three across, two down
+  let s = tx(heading, {x: M, y: EMU(0.5), w: CONTENT_W, h: EMU(0.6), size: 2000, color: HEXOF.ink});
+  const gw = CONTENT_W / 3, gh = EMU(1.9), top = EMU(1.5);
+  cells.slice(0, 6).forEach((c, i) => {
+    const x = M + (i % 3) * gw, y = top + Math.floor(i / 3) * (gh + EMU(0.25));
+    s += rect({x: x, y: y, w: gw - EMU(0.18), h: gh, fill: null, line: HEXOF.rule});
+    s += tx(c.n, {x: x + EMU(0.22), y: y + EMU(0.24), w: gw - EMU(0.6), h: EMU(0.7), size: 2800, mono: true, color: HEXOF.ink});
+    s += tx(c.l, {x: x + EMU(0.22), y: y + EMU(1.02), w: gw - EMU(0.6), h: EMU(0.7), size: 1050, color: HEXOF.ink3});
+    if (c.status) s += tx(c.status.toUpperCase(), {x: x + EMU(0.22), y: y + EMU(1.55), w: gw - EMU(0.6), h: EMU(0.28), size: 800, spc: 100, mono: true,
+      color: c.status === 'needs you' ? HEXOF.hot : c.status === 'watch' ? HEXOF.watch : HEXOF.clear});
+  });
+  return slideXml(s);
+}
+function listSlide(heading, sub, items) {
+  let s = tx(heading, {x: M, y: EMU(0.5), w: CONTENT_W, h: EMU(0.6), size: 2000, color: HEXOF.ink});
+  if (sub) s += tx(sub, {x: M, y: EMU(1.08), w: CONTENT_W, h: EMU(0.4), size: 1000, spc: 100, mono: true, color: HEXOF.ink3});
+  let y = EMU(1.62);
+  items.slice(0, 7).forEach(it => {
+    s += rect({x: M, y: y, w: CONTENT_W, h: EMU(0.012), fill: HEXOF.rule});
+    s += tx(it.title, {x: M, y: y + EMU(0.12), w: EMU(3.4), h: EMU(0.6), size: 1300, bold: true, color: HEXOF.ink});
+    if (it.meta) s += tx(it.meta, {x: M + EMU(3.5), y: y + EMU(0.16), w: EMU(1.9), h: EMU(0.5), size: 1000, mono: true, color: HEXOF.ink2});
+    s += tx(it.body, {x: M + EMU(5.5), y: y + EMU(0.1), w: CONTENT_W - EMU(5.5), h: EMU(0.68), size: 1050, color: HEXOF.ink2});
+    y += EMU(0.72);
+  });
+  return slideXml(s);
+}
+function chartSlide(title, note, rId, imgW, imgH) {
+  let s = tx(title, {x: M, y: EMU(0.5), w: EMU(8.4), h: EMU(0.55), size: 1700, color: HEXOF.ink});
+  if (note) s += tx(note, {x: SLIDE_W - M - EMU(4.2), y: EMU(0.56), w: EMU(4.2), h: EMU(0.5), size: 950, mono: true, align: 'r', color: HEXOF.ink3});
+  const availW = CONTENT_W, availH = EMU(5.2);
+  const scale = Math.min(availW / imgW, availH / imgH);
+  const w = Math.round(imgW * scale), h = Math.round(imgH * scale);
+  s += pic(rId, {x: M + Math.round((availW - w) / 2), y: EMU(1.35) + Math.round((availH - h) / 2), w: w, h: h});
+  return slideXml(s);
+}
+
+// the big number holds <small> units: "in"/"out" need a space, "%" must not get one
+function bigText(el) {
+  let out = '';
+  Array.from(el.childNodes).forEach(n => {
+    const t = n.textContent;
+    if (n.nodeType === 1 && /^[a-z]/i.test(t.trim())) out += ' ' + t.trim() + ' ';
+    else out += t;
+  });
+  return out.replace(/\s+/g, ' ').trim();
+}
+// a chip sits flush against the sentence it labels; put the separator back
+function chipText(el) {
+  const rs = Array.from(el.querySelectorAll('.r'));
+  const one = node => {
+    const chip = node.querySelector('.chip');
+    const kind = chip ? chip.textContent.trim() : '';
+    const rest = Array.from(node.childNodes).filter(n => n !== chip).map(n => n.textContent).join('').replace(/\s+/g, ' ').trim();
+    return kind && rest ? kind + ': ' + rest : (rest || kind);
+  };
+  if (rs.length) return rs.map(one).join(' · ');
+  return one(el);
+}
+function stripCells(root) {
+  return Array.from(root.querySelectorAll('.strip .cell')).map(c => ({
+    n: bigText(c.querySelector('.n')),
+    l: c.querySelector('.l').textContent.replace(/view →/i, '').replace(/\s+/g, ' ').trim(),
+    status: c.querySelector('.status') ? c.querySelector('.status').textContent.trim() : ''
+  }));
+}
+async function buildDeck() {
+  SHAPE_ID = 1;
+  const view = $('.view.on');
+  const head = view.querySelector('.viewhead');
+  const title = head && head.querySelector('h2') ? head.querySelector('h2').textContent.trim() : 'Portfolio Outlook';
+  const lede = head && head.querySelector('.lede') ? head.querySelector('.lede').textContent.trim() : '';
+  const slides = [], media = [];
+  slides.push(coverSlide(title, lede));
+
+  const cells = stripCells(view);
+  if (cells.length) slides.push(numbersSlide(VIEW === 'morning' ? 'The portfolio this morning' : title, cells));
+
+  if (VIEW === 'morning') {
+    const rows = Array.from(view.querySelectorAll('#morning-table tbody tr')).map(tr => {
+      const tds = tr.querySelectorAll('td');
+      return {title: tds[0].querySelector('.name').textContent.trim(),
+              meta: tds[1].textContent.trim() + ' · ' + tds[2].textContent.trim() + ' units',
+              body: chipText(tds[6])};
+    });
+    const flagged = rows.filter(r => !/^Clear/i.test(r.body));
+    slides.push(listSlide('What needs you', flagged.length + ' of ' + rows.length + ' communities have a reason today', flagged));
+  } else {
+    const why = view.querySelector('.whyline');
+    if (why) {
+      // one item per reason, chip as the heading, the same wording the page shows
+      const items = Array.from(why.querySelectorAll('.r')).map(r => {
+        const chip = r.querySelector('.chip');
+        const kind = chip ? chip.textContent.trim() : '';
+        const rest = Array.from(r.childNodes).filter(n => n !== chip).map(n => n.textContent).join('').replace(/\s+/g, ' ').trim();
+        return {title: kind, meta: '', body: rest};
+      }).filter(i => i.body);
+      if (items.length) slides.push(listSlide('Why it is on the list', title, items));
+      else {
+        const btn = why.querySelector('[data-send-why]');
+        slides.push(listSlide('Why it is on the list', title, [{title: 'Clear', meta: '', body: btn ? btn.dataset.body : ''}]));
+      }
+    }
+  }
+
+  // every chart the view is showing, rasterized from the page's own SVG
+  const svgs = Array.from(view.querySelectorAll('.prairie svg, .panel svg, .ladder')).slice(0, 8);
+  for (let i = 0; i < svgs.length; i++) {
+    const el = svgs[i];
+    if (el.tagName.toLowerCase() !== 'svg') continue;
+    const panel = el.closest('.panel') || el.closest('.prairie');
+    const cap = panel ? panel.querySelector('.eyebrow') : null;
+    const val = panel ? panel.querySelector('.cap .v') : null;
+    let img;
+    try { img = await svgToPng(el, 2); } catch (e) { continue; }
+    const n = media.length + 1;
+    const slideNo = slides.length + 1;
+    const rId = 'rId' + (10 + n);
+    media.push({name: 'image' + n + '.png', bytes: img.bytes, slide: slideNo, rId: rId});
+    slides.push(chartSlide(cap ? cap.textContent.trim() : title, val ? val.textContent.trim() : '', rId, img.w, img.h));
+  }
+
+  slides.push(slideXml(
+    tx('Every total is the sum of the rows beneath it.', {x: M, y: EMU(2.9), w: CONTENT_W, h: EMU(0.8), size: 2400, color: HEXOF.ink}) +
+    tx('Kettle Moraine Residential is an invented company. All 40 communities, 5,680 units and every figure here are synthetic, generated once from a seed. Nothing reads from a live system.',
+      {x: M, y: EMU(3.9), w: EMU(8.6), h: EMU(1.2), size: 1150, color: HEXOF.ink2})));
+  return packDeck(slides, media);
+}
+
+async function downloadPptx() {
+  const btn = $('#pptx-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Building'; }
+  try {
+    closeDrawer(); closeModal(); closeNav();
+    const bytes = await buildDeck();
+    const name = 'kettle-moraine-' + ($('.view.on .viewhead h2') ? $('.view.on .viewhead h2').textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'outlook') + '.pptx';
+    const blob = new Blob([bytes], {type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    // a sandboxed frame blocks the save without telling anyone, so say so
+    if (window.self !== window.top) showToast('Downloads are blocked inside this frame. Open the app in its own tab to save the deck.');
+    else showToast('Deck saved as ' + name);
+  } catch (e) {
+    showToast('The deck could not be built: ' + (e && e.message ? e.message : 'unknown'));
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'PPTX'; }
+  }
+}
+
 
 // ------------------------------------------------------------------ boot
 (function () { const sd = $('#stamp-date'); if (sd) sd.textContent = fmtRealDate(); fitLockup(); })();
