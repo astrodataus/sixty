@@ -379,7 +379,6 @@ footer div+div{margin-top:6px}
     </div>
     <div class="strip" id="strip"></div>
     <div class="prairie" id="prairie"></div>
-    <div class="regionmap" id="regionmap"></div>
     <div class="thresholds" id="thresholds"></div>
     <div class="tscroll"><table id="morning-table"></table></div>
     <p class="note" style="font-size:12.5px;color:var(--ink-3);margin-top:10px">Communities with nothing above threshold sit at the bottom, and there are supposed to be a lot of them. Exposure counts units on notice and vacant, less pre-leased, over the next sixty days. Delinquency is the ledger balance as a share of this month's billed rent.</p>
@@ -796,7 +795,9 @@ function renderMorning() {
   const list = visible();
   const S = list.map(stats);
   REASONS = {}; list.forEach((c, i) => REASONS[c.community_id] = reasons(c, S[i]));
-  renderStrip(list); renderPrairie(list, S); renderRegionMap(list, S);
+  renderStrip(list); renderPrairie(list, S);
+  // The region map is off. renderRegionMap() below is intact; add it back here and
+  // restore the <div class="regionmap" id="regionmap"></div> in the Morning view to turn it on.
   if (!$('#t-exposure')) renderThresholds();
   const rows = list.map((c, i) => ({c, s: S[i], r: REASONS[c.community_id]}));
   rows.sort((a, b) => {
