@@ -59,12 +59,12 @@ p{margin:0 0 12px}
 .sentlog b{color:var(--bluestem);font-weight:600}
 nav.views{display:flex;align-items:flex-end;gap:0;margin-top:20px;flex-wrap:wrap}
 nav.views button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:10px 18px 12px;border-bottom:2px solid transparent;margin-bottom:-1px}
-nav.views button:first-child{padding-left:0}
+nav.views > button:first-child{padding-left:0}
 nav.views button.on{color:var(--ink);border-bottom-color:var(--ink)}
 nav.views button:hover{color:var(--ink)}
 .navtools{margin-left:auto;display:flex;gap:8px;align-items:flex-start}
-.pdf-btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:8px 12px;margin-bottom:8px}
-.pdf-btn:hover{border-color:var(--oak);color:var(--ink)}
+.navtools .pdf-btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:8px 14px;margin-bottom:8px}
+.navtools .pdf-btn:hover{border-color:var(--oak);color:var(--ink)}
 /* hamburger, phones only */
 .navtoggle{display:none;align-items:center;gap:10px;width:100%;padding:11px 12px;margin:2px 0 6px;background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .navtoggle .bars{display:inline-flex;flex-direction:column;gap:3px;width:16px;flex-shrink:0}
@@ -72,8 +72,8 @@ nav.views button:hover{color:var(--ink)}
 .navtoggle[aria-expanded="true"] .bars i:nth-child(1){transform:translateY(4.5px) rotate(45deg)}
 .navtoggle[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
 .navtoggle[aria-expanded="true"] .bars i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg)}
-.scenario-btn{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:8px 14px;margin-bottom:8px}
-.scenario-btn:hover{border-color:var(--oak);color:var(--ink)}
+.navtools .scenario-btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:8px 16px 8px 18px;margin-bottom:8px}
+.navtools .scenario-btn:hover{border-color:var(--oak);color:var(--ink)}
 .scenario-btn::before{content:"";display:inline-block;width:6px;height:6px;background:var(--goldenrod);border-radius:50%;margin-right:8px;vertical-align:1px}
 .datum{position:relative;height:1px;background:var(--rule-2)}
 .datum::before{content:"";position:absolute;top:0;left:-48px;right:-48px;height:1px;background:var(--rule-2)}
@@ -179,10 +179,24 @@ section.view.on{display:block}
 .compose label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 5px}
 .compose select,.compose input[type=text],.compose textarea{width:100%;font:inherit;font-family:var(--sans);font-size:13.5px;color:var(--ink);background:var(--ground);border:1px solid var(--rule-2);border-radius:2px;padding:8px 10px;resize:vertical}
 .compose textarea{line-height:1.45}
-.compose .compose-actions{display:flex;align-items:center;gap:14px;margin-top:18px}
+/* attachments on a quick report */
+.attach{border:1px solid var(--rule);background:var(--surface);border-radius:2px;padding:13px 15px}
+.compose .attachrow{display:flex;align-items:flex-start;gap:10px;margin:0 0 11px;padding:0;font-family:var(--sans);font-size:13.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.compose .attachrow:last-of-type{margin-bottom:0}
+.compose .attachrow input{margin:3px 0 0;accent-color:var(--bluestem);flex-shrink:0}
+.compose .attachrow em{display:block;font-style:normal;font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--ink-4);margin-top:3px;word-break:break-word}
+.attachnote{margin-top:13px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;line-height:1.6;color:var(--ink-3)}
+.linkish{font:inherit;color:var(--bluestem);border-bottom:1px solid #8FB7AA}
+.linkish:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.linkish[disabled]{color:var(--ink-4);border-bottom-color:var(--rule-2);cursor:default}
+.sentitem .si-att{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.sentitem .si-att .chip{margin:0}
+.compose-actions,.compose .compose-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;margin-top:20px}
+.compose-actions .btn-primary{flex-shrink:0}
+.compose-actions .compose-hint{flex:1 1 220px;min-width:0}
 .btn-primary{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:var(--loam);color:var(--snow);border-radius:2px;padding:9px 18px}
 .btn-primary:hover{background:var(--walnut)}
-.compose-hint{font-size:12px;color:var(--ink-4)}
+.compose-hint{font-size:12px;line-height:1.5;color:var(--ink-4)}
 .sentitem{padding:12px 0;border-top:1px solid var(--rule)}
 .sentitem:first-child{border-top:none}
 .sentitem .si-to{font-size:13.5px;font-weight:500}
@@ -196,17 +210,20 @@ section.view.on{display:block}
 .modal .drawer-close{top:20px;right:22px}
 .modal h3{font-size:22px;font-weight:300;margin:0 0 6px}
 .modal .m-lede{font-size:13.5px;color:var(--ink-2);margin-bottom:18px;max-width:60ch}
-.scen-presets{display:flex;gap:10px;margin-bottom:18px}
+.scen-presets{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
 .scen-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;padding:16px;background:var(--surface);border:1px solid var(--rule);margin-bottom:18px}
 .scen-fields label{display:flex;flex-direction:column;justify-content:flex-end;gap:5px;min-width:0;font-family:var(--mono);font-size:10px;line-height:1.35;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
 .scen-fields input{display:block;width:100%;min-width:0;max-width:100%;font:inherit;font-family:var(--mono);font-size:13.5px;color:var(--ink);background:var(--ground);border:1px solid var(--rule-2);border-radius:2px;padding:6px 8px}
 @media (max-width:860px){.scen-fields{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:640px){.scen-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.scen-compare{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;padding:16px;border:1px solid var(--rule);margin-bottom:18px}
-.scen-compare .sc-col h5{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
-.scen-compare .sc-row{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0}
+.scen-compare{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px 26px;padding:18px 20px;border:1px solid var(--rule);margin-bottom:20px}
+.scen-compare .sc-col h5{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.scen-compare .sc-row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;font-size:13.5px;line-height:1.4;padding:8px 0}
+.scen-compare .sc-row+.sc-row{border-top:1px solid var(--rule)}
+.scen-compare .sc-row>span:first-child{min-width:0}
+.scen-compare .sc-row .num{white-space:nowrap;flex-shrink:0}
 .scen-compare .sc-arrow{font-size:20px;color:var(--ink-4)}
-.scen-compare .sc-delta{font-family:var(--mono);font-size:11px}
+.scen-compare .sc-delta{font-family:var(--mono);font-size:11px;margin-left:8px}
 .scen-compare .sc-delta.up{color:var(--foxglove)}
 .scen-compare .sc-delta.down{color:var(--bluestem)}
 
@@ -269,7 +286,7 @@ th.sort.on{color:var(--ink)}
 .why b{font-weight:500;color:var(--ink)}
 .why .r{display:inline;margin-right:10px}
 .why .r:last-child{margin-right:0}
-.chip{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:1px solid var(--rule-2);color:var(--ink-2);margin-right:5px;vertical-align:1px;white-space:nowrap}
+.chip{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:2px;border:1px solid var(--rule-2);color:var(--ink-2);margin:1px 6px 1px 0;vertical-align:1px;white-space:nowrap}
 .chip.hot{background:var(--hot);border-color:var(--hot);color:var(--hot-ink)}
 .chip.watch{background:var(--watch-wash);border-color:#CDB876}
 .chip.clear{background:var(--clear-wash);border-color:#8FB7AA}
@@ -297,9 +314,12 @@ th.sort.on{color:var(--ink)}
 .wideband{margin:8px 0 24px}
 
 /* why line */
-.whyline{padding:12px 16px;background:var(--surface);border-left:2px solid var(--hot);margin:0 0 20px;font-size:14.5px}
+.whyline{padding:16px 20px 17px;background:var(--surface);border-left:3px solid var(--hot);margin:0 0 22px;font-size:14.5px;line-height:1.75}
 .whyline.clearline{border-left-color:var(--clear)}
-.whyline .eyebrow{display:block;margin-bottom:4px}
+.whyline .eyebrow{display:block;margin-bottom:9px}
+.whyline .r{display:inline}
+.whyline .chip{margin-right:8px}
+.whyline .pillbtn{margin-left:10px}
 
 /* community/unit header */
 .crumbs{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
@@ -358,6 +378,7 @@ footer div+div{margin-top:6px}
   nav.views.open button[data-view].on{background:var(--surface)}
   nav.views.open .navtools{margin:0;display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px}
   nav.views.open .navtools button{margin:0;flex:1 1 0;padding:9px 4px;font-size:10.5px;letter-spacing:.04em;text-align:center;white-space:nowrap}
+  nav.views.open .scenario-btn{padding:9px 4px}
   nav.views.open .scenario-btn::before{margin-right:5px}
   .datum{margin-top:0}
   .who{padding-top:6px}
@@ -1468,6 +1489,14 @@ function recipientLabel(v) {
   return v;
 }
 
+// -- what a report would carry, named from the page it is being sent from
+function attachContext() {
+  const h2 = $('.view.on .viewhead h2');
+  const label = h2 ? h2.textContent.trim() : 'Portfolio Outlook';
+  const slug = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return {label: label, deck: 'kettle-moraine-' + slug + '.pptx', pdf: 'kettle-moraine-' + slug + '.pdf'};
+}
+
 // -- compose sheet (fully simulated; nothing leaves the page)
 let SENT_LOG = [];
 function renderCompose(subject, body, preselectRecipient) {
@@ -1478,19 +1507,35 @@ function renderCompose(subject, body, preselectRecipient) {
   h += '<label>Subject</label><input type="text" id="cs-subject" value="' + esc(subject || '') + '">';
   h += '<label>Body</label><textarea id="cs-body" rows="7">' + esc(body || '') + '</textarea>';
   h += '<label>Note (optional)</label><textarea id="cs-note" rows="2" placeholder="Add a note for the recipient"></textarea>';
+  const ax = attachContext();
+  h += '<label>Attach</label><div class="attach">';
+  h += '<label class="attachrow"><input type="checkbox" id="cs-deck"><span>Slide deck<em>' + esc(ax.deck) + '</em></span></label>';
+  h += '<label class="attachrow"><input type="checkbox" id="cs-pdf"><span>PDF<em>' + esc(ax.pdf) + ', through your print dialog</em></span></label>';
+  h += '<div class="attachnote">Both are built from <b>' + esc(ax.label) + '</b>, the page you are sending from. <button type="button" class="linkish" id="cs-attach-save">Save a copy now</button><br>Saving the PDF opens your print dialog, which closes this sheet.</div>';
+  h += '</div>';
   h += '<div class="compose-actions"><button class="btn-primary" id="cs-send" type="button">Send</button><span class="compose-hint">Nothing leaves this page. This is a demo flow.</span></div>';
   h += '</div>';
   openDrawer(h);
   mountRecipientDD(preselectRecipient);
+  $('#cs-attach-save').onclick = async () => {
+    const deck = $('#cs-deck').checked, pdf = $('#cs-pdf').checked;
+    if (!deck && !pdf) { showToast('Tick an attachment first.'); return; }
+    if (deck) await downloadPptx({keepDrawer: true});
+    if (pdf) printView();  // printing must close the sheet, and the note says so
+  };
   $('#cs-send').onclick = () => {
     const to = $('#cs-to').value, subj = $('#cs-subject').value.trim(), body2 = $('#cs-body').value, note = $('#cs-note').value;
     if (!to) { $('#cs-to-btn').focus(); $('#cs-to-btn').style.borderColor = 'var(--foxglove)'; return; }
     if (!subj) { $('#cs-subject').focus(); $('#cs-subject').style.borderColor = 'var(--foxglove)'; return; }
-    const entry = {to, toLabel: recipientLabel(to), subject: subj, body: body2, note, ts: Date.now()};
+    const attach = [];
+    if ($('#cs-deck').checked) attach.push('Deck');
+    if ($('#cs-pdf').checked) attach.push('PDF');
+    const entry = {to, toLabel: recipientLabel(to), subject: subj, body: body2, note, attach: attach, from: ax.label, ts: Date.now()};
     SENT_LOG.unshift(entry);
     updateSentLog();
     closeDrawer();
-    showToast('Sent to ' + entry.toLabel, () => { SENT_LOG = SENT_LOG.filter(x => x !== entry); updateSentLog(); });
+    const withWhat = attach.length ? ' with the ' + attach.map(a => a === 'Deck' ? 'deck' : 'PDF').join(' and ') + ' attached' : '';
+    showToast('Sent to ' + entry.toLabel + withWhat, () => { SENT_LOG = SENT_LOG.filter(x => x !== entry); updateSentLog(); });
   };
 }
 function updateSentLog() {
@@ -1500,7 +1545,9 @@ function updateSentLog() {
 }
 function renderSentLogPanel() {
   let h = '<h3>Sent</h3><div class="dr-target">' + SENT_LOG.length + ' quick report' + (SENT_LOG.length === 1 ? '' : 's') + ' sent this session. Nothing left this page.</div>';
-  h += SENT_LOG.length ? SENT_LOG.map(e => '<div class="sentitem"><div class="si-to">To ' + esc(e.toLabel) + '</div><div class="si-sub">' + esc(e.subject) + '</div><div class="si-ts">' + new Date(e.ts).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}) + '</div></div>').join('') : '<p style="color:var(--ink-3);font-size:13.5px">Nothing sent yet.</p>';
+  h += SENT_LOG.length ? SENT_LOG.map(e => '<div class="sentitem"><div class="si-to">To ' + esc(e.toLabel) + '</div><div class="si-sub">' + esc(e.subject) + '</div>' +
+    (e.attach && e.attach.length ? '<div class="si-att">' + e.attach.map(a => '<span class="chip clear">' + esc(a) + '</span>').join('') + '</div>' : '') +
+    '<div class="si-ts">' + new Date(e.ts).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}) + (e.from ? ' · from ' + esc(e.from) : '') + '</div></div>').join('') : '<p style="color:var(--ink-3);font-size:13.5px">Nothing sent yet.</p>';
   openDrawer(h);
 }
 
@@ -2024,11 +2071,15 @@ async function buildDeck() {
   return packDeck(slides, media);
 }
 
-async function downloadPptx() {
+async function downloadPptx(opts) {
+  opts = opts || {};
   const btn = $('#pptx-btn');
   if (btn) { btn.disabled = true; btn.textContent = 'Building'; }
   try {
-    closeDrawer(); closeModal(); closeNav();
+    // charts are measured from the open view, which stays measurable under the drawer,
+    // so a deck built from inside the compose sheet must not close it and lose the draft
+    if (!opts.keepDrawer) closeDrawer();
+    closeModal(); closeNav();
     const bytes = await buildDeck();
     const name = 'kettle-moraine-' + ($('.view.on .viewhead h2') ? $('.view.on .viewhead h2').textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'outlook') + '.pptx';
     const blob = new Blob([bytes], {type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation'});
