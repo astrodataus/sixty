@@ -1467,7 +1467,7 @@ function go(hash) {
     else if (p1 && C[p1]) { CUR_C = p1; CUR_U = null; }
     else if (!p1) { CUR_U = null; }
   }
-  VIEW = v;
+  VIEW = v; hideTip();
   $$('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   $$('section.view').forEach(s => s.classList.toggle('on', s.id === 'v-' + v));
   const ls = $('#lede-slot'); if (ls) { const l = $('#v-' + v + ' .viewhead.lifted .lede'); ls.textContent = l ? l.textContent : ''; }
@@ -2284,6 +2284,10 @@ function renderCalendar() {
 }
 
 // ------------------------------------------------------------------ tips
+// the hover label lives outside the views, so anything that redraws a view (a click, a new view, a new reader)
+// takes it down; otherwise the tile under the pointer is replaced before the pointer can leave it
+function hideTip() { const t = $('#tip'); if (t) t.style.display = 'none'; }
+document.addEventListener('pointerdown', e => { if (!e.target.closest('#mapcanvas')) hideTip(); }, true);
 function bindTips(root) {
   const tip = $('#tip');
   root.querySelectorAll('[data-tip]').forEach(n => {
@@ -2541,6 +2545,7 @@ function renderScenCompare() {
   $('#scen-compare').innerHTML = h;
 }
 function refreshView() {
+  hideTip();
   if (VIEW === 'morning') renderMorning();
   else if (VIEW === 'community') renderCommunity(CUR_C, CUR_FILTER);
   else if (VIEW === 'unit') { if (CUR_U) renderUnit(CUR_U); else if (CUR_C) renderUnitPicker(CUR_C); else renderUnitGrid(); }
