@@ -864,6 +864,137 @@ footer div+div{margin-top:6px}
   .lede{font-size:11pt}
 }
 </style>
+<style>/* the intro and the tour: public site only (build.py adds this to dist/index.html) */
+.intro-links{display:inline-flex;align-items:baseline;gap:8px;margin-left:auto}
+.intro-links button{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--rule-2);padding:0 0 1px}
+.intro-links button:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.intro-links span{color:var(--ink-4)}
+body.intro-open{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:90;background:rgba(26,23,18,.55);display:flex;align-items:flex-start;justify-content:center;padding:3vh 20px;overflow-y:auto}
+#intro.hidden{display:none}
+#intro .ibox{width:min(760px,100%);background:var(--parchment);border:1px solid var(--rule-2);box-shadow:0 20px 50px rgba(26,23,18,.28);margin:auto;animation:intro-in .32s cubic-bezier(.2,.7,.2,1) both}
+@keyframes intro-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#intro .itop{position:relative;display:flex;align-items:stretch;background:var(--peat);color:var(--cream);min-height:150px}
+#intro .itext{flex:1;padding:24px 30px 22px;display:flex;flex-direction:column;justify-content:flex-end}
+#intro .ik{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#d8cdb3;margin-bottom:12px}
+#intro h2{color:var(--snow);font-size:clamp(24px,3vw,31px);font-weight:200;max-width:20ch;line-height:1.12}
+#intro .iphoto{order:2;position:relative;margin:0;width:38%;flex:none;overflow:hidden;border-left:1px solid rgba(243,239,227,.18)}
+#intro .iphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#intro .iphoto figcaption{position:absolute;right:8px;bottom:7px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--snow);background:rgba(26,23,18,.55);padding:3px 6px}
+#intro .ibd{padding:20px 30px 22px}
+#intro .ibd p{font-size:15px;line-height:1.55;color:var(--ink-2);max-width:62ch}
+#intro .ibd p b{color:var(--ink);font-weight:500}
+#intro .icols{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin:14px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
+#intro .icols h4{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+#intro .icols ul{margin:0;padding-left:17px}
+#intro .icols li{font-size:13.5px;line-height:1.45;color:var(--ink-2);margin-bottom:6px}
+#intro .icols li b{color:var(--ink);font-weight:500}
+#intro .icaveat{margin-top:14px;font-size:13px;line-height:1.55;color:var(--ink-3);background:var(--surface-2);padding:12px 15px;border-left:3px solid var(--goldenrod)}
+#intro .icaveat b{color:var(--ink-2);font-weight:500}
+#intro .iact{margin-top:18px;display:flex;gap:12px 20px;align-items:center;flex-wrap:wrap}
+#intro .iact>span{font-size:13px;color:var(--ink-3)}
+#intro .iact .btn-primary{padding:11px 26px}
+.tour-sw{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;user-select:none;position:relative}
+.tour-sw input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.tour-sw .sw{position:relative;width:38px;height:22px;border-radius:11px;background:var(--rule-2);transition:background .18s;flex:none}
+.tour-sw .sw:after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--snow);box-shadow:0 1px 3px rgba(26,23,18,.3);transition:transform .18s}
+.tour-sw input:checked+.sw{background:var(--bluestem)}
+.tour-sw input:checked+.sw:after{transform:translateX(16px)}
+.tour-sw input:focus-visible+.sw{outline:2px solid var(--foxglove);outline-offset:2px}
+#tour{display:none}
+#tour.on{display:block}
+#tour .tour-spot{position:fixed;z-index:95;box-shadow:0 0 0 200vmax rgba(26,23,18,.5);outline:2px solid var(--goldenrod);outline-offset:0;pointer-events:none;transition:left .25s,top .25s,width .25s,height .25s}
+#tour .tour-card{position:fixed;z-index:96;width:350px;max-width:calc(100vw - 16px);background:var(--parchment);border:1px solid var(--rule-2);padding:18px 20px 16px;box-shadow:0 20px 50px rgba(26,23,18,.3)}
+#tour .tour-card.dock{left:8px!important;right:8px;bottom:8px;top:auto!important;width:auto}
+#tour .tour-card.dock.top{top:8px!important;bottom:auto}
+#tour .tour-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--foxglove);margin-bottom:7px}
+#tour h3{font-size:19px;font-weight:300;letter-spacing:.03em;margin:0 0 6px;color:var(--ink)}
+#tour p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:0}
+#tour .tour-act{display:flex;align-items:center;gap:8px;margin-top:16px}
+#tour .tour-act .sp{flex:1}
+#tour .tour-end{font-size:13px;color:var(--ink-3);border-bottom:1px solid var(--rule-2)}
+#tour .tour-end:hover{color:var(--ink);border-bottom-color:var(--ink)}
+#tour .btn-sec,#tour .btn-primary{padding:8px 14px;font-size:11.5px}
+#tour .btn-sec[disabled]{opacity:.4;cursor:default}
+@media (max-width:640px){
+  .intro-links{margin-left:0;width:100%}
+  #intro{padding:0}
+  #intro .ibox{min-height:100%;border:0}
+  #intro .itop{min-height:0}
+  #intro .iphoto{display:none}
+  #intro .itext{padding:22px 18px 20px}
+  #intro .ibd{padding:20px 18px 24px}
+  #intro .icols{grid-template-columns:1fr;gap:14px}
+}
+@media (prefers-reduced-motion:reduce){#intro .ibox{animation:none} #tour .tour-spot{transition:none}}
+@media print{#intro,#tour,.intro-links{display:none!important}}
+
+/* watch the video: the buttons */
+.watch-btn{display:inline-flex;align-items:center;gap:9px;margin-left:auto;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;padding:9px 16px 9px 12px}
+.watch-btn:hover{border-color:var(--oak)}
+.watch-btn svg{width:16px;height:16px;color:var(--foxglove)}
+.watch-btn span{color:var(--ink-3)}
+#intro .iagain{margin:12px 0 0;font-size:13px;color:var(--ink-3)}
+.intro-links .watch-link svg{width:9px;height:9px;color:var(--foxglove);margin-right:5px;vertical-align:0}
+
+/* watch the video: the wide player */
+body.vid-open{overflow:hidden}
+#vid{position:fixed;inset:0;z-index:100;background:#14110c;overflow-y:auto;display:flex;flex-direction:column;padding:18px 24px 14px;color:var(--cream)}
+#vid.hidden{display:none}
+#vid .vbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:min(100%,calc((100vh - 230px) * 16 / 9));margin:0 auto 12px}
+#vid .vk{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#bfb399;margin-bottom:6px}
+#vid h2{font-size:22px;font-weight:200;color:var(--snow);letter-spacing:.04em}
+#vid h2 span{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:#bfb399;margin-left:8px}
+#vid .vx{font-size:30px;line-height:1;color:#d8cdb3;padding:0 4px}
+#vid .vx:hover{color:var(--snow)}
+#vid .vstage{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#vid .vframe{position:relative;width:min(100%,calc((100vh - 230px) * 16 / 9));aspect-ratio:16/9;background:#000;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+#vid video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000;cursor:pointer}
+#vid .vframe:fullscreen{width:100vw;height:100vh;aspect-ratio:auto}
+#vid .vbig{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:rgba(20,17,12,.72);color:var(--snow);display:flex;align-items:center;justify-content:center;border:1px solid rgba(243,239,227,.35);transition:opacity .2s,transform .2s}
+#vid .vbig svg{width:34px;height:34px;margin-left:4px}
+#vid .vbig:hover{transform:scale(1.05)}
+#vid.playing .vbig{opacity:0;pointer-events:none}
+#vid .vctl{width:min(100%,calc((100vh - 230px) * 16 / 9));margin-top:6px}
+#vid .vscrub{position:relative;height:40px;display:flex;align-items:center;cursor:pointer;touch-action:none;outline:none}
+#vid .vtrack{position:relative;width:100%;height:8px;background:rgba(243,239,227,.16);border-radius:4px;transition:height .15s}
+#vid .vscrub.hover .vtrack,#vid .vscrub.drag .vtrack,#vid .vscrub:focus-visible .vtrack{height:14px;border-radius:7px}
+#vid .vbuf{position:absolute;left:0;top:0;bottom:0;background:rgba(243,239,227,.22);border-radius:inherit}
+#vid .vfill{position:absolute;left:0;top:0;bottom:0;background:var(--goldenrod);border-radius:inherit}
+#vid .vmark{position:absolute;top:0;bottom:0;width:3px;margin-left:-1.5px;background:rgba(20,17,12,.85)}
+#vid .vknob{position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--snow);box-shadow:0 1px 6px rgba(0,0,0,.5);pointer-events:none;transition:transform .15s}
+#vid .vscrub.hover .vknob,#vid .vscrub.drag .vknob{transform:scale(1.15)}
+#vid .vscrub:focus-visible .vknob{outline:2px solid var(--goldenrod);outline-offset:3px}
+#vid .vprev{position:absolute;bottom:42px;width:208px;transform:translateX(-50%);background:#14110c;border:1px solid rgba(243,239,227,.25);padding:8px;opacity:0;pointer-events:none;transition:opacity .12s}
+#vid .vscrub.hover .vprev,#vid .vscrub.drag .vprev{opacity:1}
+#vid .vpimg{width:192px;height:108px;background:#000 no-repeat}
+#vid .vptxt{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-family:var(--mono);font-size:12px;color:#d8cdb3}
+#vid .vptxt b{font-weight:500;color:var(--snow)}
+#vid .vrow{display:flex;align-items:center;gap:6px;margin-top:2px;flex-wrap:wrap}
+#vid .vbtn{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;color:#e9e1cd;border-radius:2px}
+#vid .vbtn:hover{background:rgba(243,239,227,.1);color:var(--snow)}
+#vid .vbtn svg{width:24px;height:24px}
+#vid .vplay svg{width:26px;height:26px}
+#vid .vtime{font-family:var(--mono);font-size:13px;color:#bfb399;margin-left:8px;white-space:nowrap}
+#vid .vtime b{color:var(--snow);font-weight:500}
+#vid .vchap{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--goldenrod);margin-left:12px;white-space:nowrap}
+#vid .vsp{flex:1}
+#vid .vjump{display:inline-flex;align-items:center;gap:8px;margin-right:6px}
+#vid .vjump label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#bfb399}
+#vid .vjump select{font:inherit;font-size:13px;color:var(--snow);background:#2a251c;border:1px solid rgba(243,239,227,.25);border-radius:2px;padding:6px 8px}
+#vid .vnote{width:min(100%,calc((100vh - 230px) * 16 / 9));margin:6px auto 0;font-size:12px;color:#9a8d76}
+@media (max-width:760px){
+  #vid{padding:12px 10px 10px}
+  #vid .vbar,#vid .vframe,#vid .vctl,#vid .vnote{width:100%}
+  #vid h2{font-size:18px}
+  #vid .vchap,#vid .vjump label{display:none}
+  #vid .vnote{display:none}
+}
+@media (max-height:520px){#vid .vnote,#vid .vk{display:none}}
+@media (prefers-reduced-motion:reduce){#vid .vtrack,#vid .vknob,#vid .vbig{transition:none}}
+@media print{#vid{display:none!important}}
+</style>
+<script>window.__SIXTY_VIDEO__={"src": "media/sixty-video.mp4", "poster": "media/sixty-video-poster.jpg", "duration": 252.01, "chapters": [{"t": 14.5, "name": "The Morning"}, {"t": 47.0, "name": "One number"}, {"t": 59.0, "name": "Ask Sixty"}, {"t": 73.5, "name": "Scenario"}, {"t": 87.0, "name": "The Community"}, {"t": 111.0, "name": "One door"}, {"t": 129.5, "name": "Send"}, {"t": 145.5, "name": "Share"}, {"t": 158.0, "name": "The Market"}, {"t": 167.5, "name": "The Calendar"}, {"t": 181.5, "name": "Explore"}, {"t": 203.0, "name": "Reports"}, {"t": 222.5, "name": "Three seats"}], "sprite": {"src": "media/sixty-video-frames.jpg", "every": 2, "w": 192, "h": 108, "cols": 12, "n": 127}};</script>
 </head>
 <body>
 <header class="mast">
@@ -4461,6 +4592,409 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLockup)
   go('morning');
   fitLockup();
 })();
+// ------------------------------------------------------------------ the video (public site only)
+/* A wide player for the walkthrough video, with a scrubber that is easy to grab: a tall hit
+   area, a track that thickens under the pointer, the time and a preview frame above it, and a
+   mark at the start of each chapter. build.py writes window.__SIXTY_VIDEO__ only when there is a
+   video; without it, nothing here shows. */
+const VIDEO = (function () {
+  const V = window.__SIXTY_VIDEO__;
+  const has = !!(V && V.src);
+  const mmss = t => { t = Math.max(0, Math.round(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+  const len = has ? mmss(V.duration) : '';
+  const ICON = {
+    play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg>',
+    vol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h4l5-4v13l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h4l5-4v13l-5-4H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>',
+    back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.6 4.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M4.5 4.5v5h5" fill="none" stroke="currentColor" stroke-width="1.7"/><text x="12" y="15.6" font-size="7" text-anchor="middle" fill="currentColor" font-family="DM Mono,monospace">10</text></svg>',
+    fwd: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 0 6.6 4.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M19.5 4.5v5h-5" fill="none" stroke="currentColor" stroke-width="1.7"/><text x="12" y="15.6" font-size="7" text-anchor="middle" fill="currentColor" font-family="DM Mono,monospace">10</text></svg>'
+  };
+  const CH = (has && V.chapters) || [];
+  function chapterAt(t) { let c = null; CH.forEach(x => { if (x.t <= t + 0.01) c = x; }); return c; }
+
+  let el = null, vid = null, dragging = false, wasPlaying = false, lastFocus = null;
+  function build() {
+    if (el) return;
+    el = document.createElement('div');
+    el.id = 'vid'; el.className = 'hidden';
+    el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-labelledby', 'vid-h');
+    el.innerHTML =
+      '<div class="vbar"><div><div class="vk">Kettle Moraine Residential · Portfolio Outlook</div><h2 id="vid-h">A walk through Sixty <span>' + len + '</span></h2></div>' +
+        '<button type="button" class="vx" data-v="close" aria-label="Close the video">&times;</button></div>' +
+      '<div class="vstage"><div class="vframe">' +
+        '<video id="vid-v" preload="metadata" playsinline' + (V.poster ? ' poster="' + V.poster + '"' : '') + '><source src="' + V.src + '" type="video/mp4"></video>' +
+        '<button type="button" class="vbig" data-v="toggle" aria-label="Play">' + ICON.play + '</button>' +
+        '<div class="vcap" id="vid-cap" aria-hidden="true"></div>' +
+      '</div>' +
+      '<div class="vctl">' +
+        '<div class="vscrub" id="vid-scrub" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="' + Math.round(V.duration) + '" aria-valuenow="0" aria-valuetext="0:00 of ' + len + '">' +
+          '<div class="vtrack"><div class="vbuf" id="vid-buf"></div><div class="vfill" id="vid-fill"></div>' +
+            CH.map(c => '<i class="vmark" style="left:' + (100 * c.t / V.duration).toFixed(3) + '%"></i>').join('') +
+          '</div><div class="vknob" id="vid-knob"></div>' +
+          '<div class="vprev" id="vid-prev" aria-hidden="true"><div class="vpimg" id="vid-pimg"></div><div class="vptxt"><b id="vid-pt">0:00</b><span id="vid-pc"></span></div></div>' +
+        '</div>' +
+        '<div class="vrow">' +
+          '<button type="button" class="vbtn vplay" data-v="toggle" aria-label="Play">' + ICON.play + '</button>' +
+          '<button type="button" class="vbtn" data-v="back" aria-label="Back 10 seconds">' + ICON.back + '</button>' +
+          '<button type="button" class="vbtn" data-v="fwd" aria-label="Forward 10 seconds">' + ICON.fwd + '</button>' +
+          '<span class="vtime"><b id="vid-t">0:00</b> / ' + len + '</span>' +
+          '<span class="vchap" id="vid-ch"></span>' +
+          '<span class="vsp"></span>' +
+          (CH.length ? '<span class="vjump"><label for="vid-jump">Jump to</label><select id="vid-jump"><option value="">Chapter</option>' + CH.map(c => '<option value="' + c.t + '">' + esc(c.name) + ' · ' + mmss(c.t) + '</option>').join('') + '</select></span>' : '') +
+          '<button type="button" class="vbtn" data-v="mute" aria-label="Mute">' + ICON.vol + '</button>' +
+          '<button type="button" class="vbtn" data-v="full" aria-label="Full screen">' + ICON.full + '</button>' +
+        '</div></div></div>' +
+      '<p class="vnote">Kettle Moraine Residential is invented and every figure is synthetic. Space plays and pauses, the arrow keys skip five seconds, Escape closes.</p>';
+    document.body.appendChild(el);
+    vid = $('#vid-v');
+    el.addEventListener('click', e => {
+      const b = e.target.closest('[data-v]');
+      if (!b) { if (e.target === el || e.target.classList.contains('vstage')) close(); else if (e.target === vid) toggle(); return; }
+      const a = b.dataset.v;
+      if (a === 'close') close(); else if (a === 'toggle') toggle(); else if (a === 'back') seek(vid.currentTime - 10);
+      else if (a === 'fwd') seek(vid.currentTime + 10); else if (a === 'mute') { vid.muted = !vid.muted; paint(); } else if (a === 'full') full();
+    });
+    const j = $('#vid-jump'); if (j) j.addEventListener('change', () => { if (j.value !== '') { seek(+j.value); vid.play().catch(() => {}); } j.value = ''; });
+    ['play', 'pause', 'timeupdate', 'progress', 'loadedmetadata', 'volumechange', 'ended', 'seeked'].forEach(ev => vid.addEventListener(ev, paint));
+    vid.addEventListener('ended', () => { el.classList.add('ended'); });
+    vid.addEventListener('play', () => el.classList.remove('ended'));
+    bindScrub();
+  }
+  function dur() { return (vid && isFinite(vid.duration) && vid.duration) || V.duration; }
+  function seek(t) { vid.currentTime = Math.max(0, Math.min(dur() - 0.05, t)); paint(); }
+  function toggle() { if (vid.paused || vid.ended) vid.play().catch(() => {}); else vid.pause(); }
+  function full() {
+    const f = $('#vid .vframe');
+    try { if (document.fullscreenElement) document.exitFullscreen(); else if (f.requestFullscreen) f.requestFullscreen(); else if (vid.webkitEnterFullscreen) vid.webkitEnterFullscreen(); } catch (e) {}
+  }
+  function paint() {
+    if (!vid) return;
+    const d = dur(), t = vid.currentTime || 0, p = d ? Math.min(1, t / d) : 0;
+    $('#vid-fill').style.width = (100 * p) + '%'; $('#vid-knob').style.left = (100 * p) + '%';
+    let b = 0; try { if (vid.buffered.length) b = vid.buffered.end(vid.buffered.length - 1) / d; } catch (e) {}
+    $('#vid-buf').style.width = (100 * Math.min(1, b)) + '%';
+    $('#vid-t').textContent = mmss(t);
+    const s = $('#vid-scrub'); s.setAttribute('aria-valuenow', Math.round(t)); s.setAttribute('aria-valuetext', mmss(t) + ' of ' + mmss(d));
+    const c = chapterAt(t); $('#vid-ch').textContent = c ? c.name : '';
+    const playing = !vid.paused && !vid.ended;
+    el.classList.toggle('playing', playing);
+    $$('#vid [data-v="toggle"]').forEach(x => { x.innerHTML = playing ? ICON.pause : ICON.play; x.setAttribute('aria-label', playing ? 'Pause' : 'Play'); });
+    const m = $('#vid [data-v="mute"]'); m.innerHTML = vid.muted ? ICON.mute : ICON.vol; m.setAttribute('aria-label', vid.muted ? 'Unmute' : 'Mute');
+  }
+  function bindScrub() {
+    const s = $('#vid-scrub'), pv = $('#vid-prev');
+    const frac = x => { const r = s.getBoundingClientRect(); return Math.max(0, Math.min(1, (x - r.left) / r.width)); };
+    function preview(x) {
+      const f = frac(x), t = f * dur(), r = s.getBoundingClientRect();
+      $('#vid-pt').textContent = mmss(t);
+      const c = chapterAt(t); $('#vid-pc').textContent = c ? c.name : '';
+      const im = $('#vid-pimg');
+      if (V.sprite) {
+        const S = V.sprite, i = Math.min(S.n - 1, Math.floor(t / S.every)), col = i % S.cols, row = Math.floor(i / S.cols);
+        im.style.backgroundImage = 'url(' + S.src + ')';
+        im.style.backgroundSize = (S.cols * S.w) + 'px ' + (Math.ceil(S.n / S.cols) * S.h) + 'px';
+        im.style.backgroundPosition = (-col * S.w) + 'px ' + (-row * S.h) + 'px';
+      }
+      const w = pv.offsetWidth || 200, left = Math.max(w / 2, Math.min(r.width - w / 2, x - r.left));
+      pv.style.left = left + 'px'; s.classList.add('hover');
+    }
+    s.addEventListener('pointermove', e => { preview(e.clientX); if (dragging) seek(frac(e.clientX) * dur()); });
+    s.addEventListener('pointerleave', () => { if (!dragging) s.classList.remove('hover'); });
+    s.addEventListener('pointerdown', e => {
+      e.preventDefault(); dragging = true; wasPlaying = !vid.paused; vid.pause();
+      try { s.setPointerCapture(e.pointerId); } catch (x) {}
+      s.classList.add('drag'); preview(e.clientX); seek(frac(e.clientX) * dur()); s.focus({preventScroll: true});
+    });
+    const up = e => {
+      if (!dragging) return; dragging = false; s.classList.remove('drag');
+      if (e && e.type === 'pointerup') { const r = s.getBoundingClientRect(); if (e.clientY < r.top - 30 || e.clientY > r.bottom + 30) s.classList.remove('hover'); }
+      if (wasPlaying) vid.play().catch(() => {});
+    };
+    s.addEventListener('pointerup', up); s.addEventListener('pointercancel', up);
+    s.addEventListener('keydown', e => {
+      const k = e.key, d = dur();
+      const step = {ArrowRight: 5, ArrowUp: 5, ArrowLeft: -5, ArrowDown: -5, PageUp: 30, PageDown: -30}[k];
+      if (step != null) { e.preventDefault(); e.stopPropagation(); seek(vid.currentTime + step); }
+      else if (k === 'Home') { e.preventDefault(); e.stopPropagation(); seek(0); }
+      else if (k === 'End') { e.preventDefault(); e.stopPropagation(); seek(d); }
+    });
+  }
+  function open(at) {
+    if (!has) return;
+    build(); lastFocus = document.activeElement;
+    el.classList.remove('hidden'); document.body.classList.add('vid-open');
+    if (at != null) seek(at);
+    paint();
+    vid.play().catch(() => {});
+    const b = $('#vid .vplay'); if (b) b.focus({preventScroll: true});
+  }
+  function close() {
+    if (!el || el.classList.contains('hidden')) return;
+    try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {}
+    vid.pause(); el.classList.add('hidden'); document.body.classList.remove('vid-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll: true});
+  }
+  function isOpen() { return !!el && !el.classList.contains('hidden'); }
+  document.addEventListener('keydown', e => {
+    if (!isOpen()) return;
+    const k = e.key, inSel = e.target && e.target.tagName === 'SELECT';
+    if (k === 'Escape') { if (document.fullscreenElement) return; e.preventDefault(); e.stopImmediatePropagation(); close(); return; }
+    if (inSel || (e.target && e.target.id === 'vid-scrub' && /Arrow|Page|Home|End/.test(k))) return;
+    if (k === ' ' || k === 'k' || k === 'K') { if (e.target && e.target.tagName === 'BUTTON' && k === ' ') return; e.preventDefault(); toggle(); }
+    else if (k === 'ArrowRight') { e.preventDefault(); seek(vid.currentTime + 5); }
+    else if (k === 'ArrowLeft') { e.preventDefault(); seek(vid.currentTime - 5); }
+    else if (k === 'l' || k === 'L') seek(vid.currentTime + 10);
+    else if (k === 'j' || k === 'J') seek(vid.currentTime - 10);
+    else if (k === 'm' || k === 'M') { vid.muted = !vid.muted; paint(); }
+    else if (k === 'f' || k === 'F') full();
+    e.stopImmediatePropagation();
+  }, true);
+  return {has, len, open, close, isOpen, state: () => vid ? {open: isOpen(), t: vid.currentTime, paused: vid.paused, d: dur(), muted: vid.muted} : {open: false}};
+})();
+window.__sixtyVideo = VIDEO;
+
+// ------------------------------------------------------------------ the intro and the tour (public site only)
+/* build.py splices this into the app for dist/index.html only; the Omni build never carries it.
+   The intro says who you are and what the page is for, once per browser; "About this demo"
+   under the date brings it back. Its "Show me around" switch starts a short tour that points
+   at one part of The Morning at a time, says what it is in plain words, and never clicks
+   anything for you. Every figure in the intro is read from the rows, like the rest of the page. */
+const INTRO = (function () {
+  const store = {
+    get(k) { try { return window.localStorage.getItem('sixty-' + k); } catch (e) { return null; } },
+    set(k, v) { try { window.localStorage.setItem('sixty-' + k, v); } catch (e) {} }
+  };
+  const MARKET_WORDS = {'Fox Valley': 'the Fox Valley', 'Northern Illinois': 'northern Illinois'};
+  const PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>';
+  const andList = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+
+  function facts() {
+    const list = CL.slice();
+    const S = list.map(stats);
+    const rows = list.map((c, i) => ({c, s: S[i], r: reasons(c, S[i])}));
+    const hot = rows.filter(x => x.r.some(r => r.level === 'hot'));
+    const watch = rows.filter(x => x.r.length && !x.r.some(r => r.level === 'hot'));
+    rows.sort((a, b) => {
+      const ha = a.r.filter(r => r.level === 'hot').length, hb = b.r.filter(r => r.level === 'hot').length;
+      if (hb !== ha) return hb - ha;
+      if (b.r.length !== a.r.length) return b.r.length - a.r.length;
+      return (b.s.expPct - b.s.expTarget) - (a.s.expPct - a.s.expTarget);
+    });
+    const byMarket = {};
+    list.forEach(c => { byMarket[c.market] = (byMarket[c.market] || 0) + 1; });
+    const markets = Object.keys(byMarket).sort((a, b) => byMarket[b] - byMarket[a]).map(m => MARKET_WORDS[m] || m);
+    const pm = list.slice().sort((a, b) => a.name < b.name ? -1 : 1)[0];
+    return {n: list.length, units: sum(S, s => s.units), markets, hot: hot.length, watch: watch.length,
+      clear: list.length - hot.length - watch.length, top: rows[0], through: fmtD(TODAY) + ' ' + dObj(TODAY).getUTCFullYear(), pm};
+  }
+
+  function tourWanted() { const w = store.get('tour'); return w === null ? store.get('tour-done') !== '1' : w === 'on'; }
+  function switchHTML() {
+    return '<label class="tour-sw"><input type="checkbox" id="tour-on"' + (tourWanted() ? ' checked' : '') + '><span class="sw" aria-hidden="true"></span>Show me around</label>';
+  }
+
+  function introHTML() {
+    const F = facts(), top = F.top, p = photoOf(top.c);
+    const topWhy = top.r.length ? top.r.map(r => r.kind.toLowerCase()).filter((k, i, a) => a.indexOf(k) === i) : [];
+    return '<div class="ibox">' +
+      '<div class="itop' + (p ? ' has-photo' : '') + '">' +
+        (p ? '<figure class="iphoto"><img src="' + p.src + '" style="' + photoFrame(top.c) + '" alt="" draggable="false"><figcaption>Representative photo</figcaption></figure>' : '') +
+        '<div class="itext"><div class="ik">Kettle Moraine Residential · Director of Property Management</div>' +
+        '<h2 id="intro-h">Which of your ' + F.n + ' communities need you first?</h2></div>' +
+      '</div>' +
+      '<div class="ibd">' +
+        '<p>You run property management for <b>Kettle Moraine Residential</b>: ' + F.n + ' communities and ' + fmt(F.units) + ' apartments in ' + esc(andList(F.markets)) + '. Leasing, rent, renewals, work orders and the market reports are all in your systems already. What they don\'t tell you is where to look first.</p>' +
+        '<p>This page ranks every community by what needs attention in the next sixty days, and says why, down to the unit. As of ' + esc(F.through) + ', <b>' + F.hot + ' need you</b>, ' + F.watch + ' are worth watching and ' + F.clear + ' are clear.</p>' +
+        '<div class="icols"><div><h4>What you\'ll find</h4><ul>' +
+          '<li><b>The Morning:</b> every community on a map and in one ranked list, with the reason written out.</li>' +
+          '<li><b>The Community</b> and <b>The Unit:</b> one property, then one door, its lease and its ledger.</li>' +
+          '<li><b>The Market</b> and <b>The Calendar:</b> comps that moved since yesterday, and 120 days of move-ins and move-outs.</li>' +
+          '<li><b>Explore</b> and <b>Reports:</b> your own questions, saved and scheduled.</li></ul></div>' +
+        '<div><h4>Try this</h4><ul>' +
+          '<li>Open <b>' + esc(top.c.name) + '</b>, first on the list' + (topWhy.length ? ' for ' + esc(andList(topWhy)) : '') + ', and see what put it there.</li>' +
+          '<li>Change <b>Reading as</b> to one property manager and watch the page narrow to what they see.</li>' +
+          '<li>Send a quick report from any community.</li></ul></div></div>' +
+        '<div class="icaveat"><b>Kettle Moraine Residential is not a real company.</b> Every figure is synthetic, generated once from a seed, and each total is the sum of the rows beneath it. The photos show building types, not the buildings. Nothing you send leaves this page.</div>' +
+        '<div class="iact"><button class="btn-primary" type="button" data-intro-start>Start</button>' + switchHTML() +
+          (VIDEO.has ? '<button class="watch-btn" type="button" data-watch>' + PLAY_ICON + 'Watch the video <span>' + VIDEO.len + '</span></button>' : '') +
+          '</div><p class="iagain">Open this again from About this demo, next to the date.</p>' +
+      '</div></div>';
+  }
+
+  function open() {
+    tourEnd();
+    const el = $('#intro');
+    el.innerHTML = introHTML(); el.classList.remove('hidden'); el.scrollTop = 0;
+    document.body.classList.add('intro-open');
+    store.set('intro-seen', '1');
+    const b = $('[data-intro-start]'); if (b) b.focus({preventScroll: true});
+  }
+  function close(startTour) {
+    const el = $('#intro'); if (el.classList.contains('hidden')) return;
+    el.classList.add('hidden'); el.innerHTML = ''; document.body.classList.remove('intro-open');
+    if (startTour) tourStart(); else { const a = $('#intro-open'); if (a) a.focus({preventScroll: true}); }
+  }
+
+  // ---------------------------------------------------------------- the tour
+  function steps() {
+    const F = facts();
+    return [
+      {sel: '.mast .brand', t: 'Your portfolio, one page',
+        b: 'This shows the next sixty days of every Kettle Moraine community. The company is made up, and the data runs through ' + esc(F.through) + '.'},
+      {sel: '#views-nav', alt: '#nav-toggle', t: 'Seven views',
+        b: 'The Morning is where you start. The Community, The Unit, The Market and The Calendar go deeper. Explore and Reports are for your own questions. This tour stays on The Morning.',
+        ab: 'Open this menu for all seven. The Morning is where you start; the others go deeper, and Explore and Reports are for your own questions. This tour stays on The Morning.'},
+      {sel: '#who-dd', t: 'Reading as',
+        b: 'See the page as you, a regional or one property manager. Everything narrows to the communities that person looks after.'},
+      {sel: '#ask-host', t: 'Ask Sixty',
+        b: 'Type a community, a unit number or a report name, and jump straight to it.'},
+      {sel: '#layers', t: 'The numbers that matter',
+        b: 'Each one says whether it\'s on target. Pick one and the map shows the units behind it.'},
+      {sel: '#mapbox', t: 'The map',
+        b: 'Every community, colored by how it\'s doing. Hover for a photo and the reasons. Zoom in far enough and every unit is a door you can open.'},
+      {sel: '#prairie', t: 'The prairie line',
+        b: 'One bar per community: how much of it could sit empty in the next sixty days. The tick is its target.'},
+      {sel: '#thresholds', t: 'Your thresholds',
+        b: 'These are the only opinions on the page. Change one and the list re-sorts.'},
+      {sel: '#morning-table tbody tr:first-child', t: 'The list',
+        b: 'Every community once, ranked. The reason is written out, and the underlined parts open the rows behind it. Click a name to open the community.'},
+      {sel: '#share-btn', alt: '#nav-toggle', t: 'Share or download',
+        b: 'Save any view as a PDF, PowerPoint or spreadsheet, or send a quick report. In this demo, nothing is actually sent.',
+        ab: 'It\'s in this menu, under the views. Save any view as a PDF, PowerPoint or spreadsheet, or send a quick report. In this demo, nothing is actually sent.'},
+      {sel: '#intro-links', t: 'Come back any time',
+        b: VIDEO.has ? 'Open the intro again, take this tour again, or watch the video, from here.' : 'Open the intro again, or take this tour again, from here.'}
+    ];
+  }
+  const TOUR = {on: false, i: 0, steps: [], el: null};
+  function target(s) {
+    const pick = q => { const e = q && $(q); if (!e) return null; const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 ? e : null; };
+    return pick(s.sel) || pick(s.alt);
+  }
+  function build() {
+    if (TOUR.el) return;
+    const w = document.createElement('div');
+    w.id = 'tour'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'false'); w.setAttribute('aria-labelledby', 'tour-h');
+    w.innerHTML = '<div class="tour-spot" id="tour-spot"></div>' +
+      '<div class="tour-card" id="tour-card"><div class="tour-k" id="tour-k"></div><h3 id="tour-h"></h3><p id="tour-b"></p>' +
+      '<div class="tour-act"><button class="tour-end" type="button" data-tour="end">End tour</button><span class="sp"></span>' +
+      '<button class="btn-sec" type="button" data-tour="back">Back</button><button class="btn-primary" type="button" data-tour="next">Next</button></div></div>';
+    document.body.appendChild(w); TOUR.el = w;
+    w.addEventListener('click', e => {
+      const b = e.target.closest('[data-tour]'); if (!b) return;
+      const a = b.dataset.tour;
+      if (a === 'end') tourEnd(); else if (a === 'back') show(TOUR.i - 1, -1); else show(TOUR.i + 1, 1);
+    });
+  }
+  function tourStart() {
+    closeDrawer(); closeModal(); closeNav();
+    if (VIEW !== 'morning') go('morning');
+    build(); TOUR.steps = steps(); TOUR.on = true; document.body.classList.add('touring');
+    TOUR.el.classList.add('on'); show(0, 1);
+  }
+  function tourEnd() {
+    if (!TOUR.on) return;
+    TOUR.on = false; store.set('tour-done', '1'); document.body.classList.remove('touring');
+    TOUR.el.classList.remove('on');
+    const f = $('#intro-tour'); if (f) f.focus({preventScroll: true});
+  }
+  function show(i, dir) {
+    if (i >= TOUR.steps.length) { tourEnd(); return; }
+    if (i < 0) return;
+    const s = TOUR.steps[i], t = target(s);
+    if (!t) { show(i + dir, dir); return; }   // a part this width does not show
+    TOUR.i = i;
+    const n = TOUR.steps.length;
+    $('#tour-k').textContent = 'Tour · ' + (i + 1) + ' of ' + n;
+    $('#tour-h').textContent = s.t;
+    $('#tour-b').innerHTML = (s.ab && s.alt && t === $(s.alt)) ? s.ab : s.b;
+    $('#tour-card [data-tour="back"]').disabled = i === 0;
+    $('#tour-card [data-tour="next"]').textContent = i === n - 1 ? 'Done' : 'Next';
+    const r = t.getBoundingClientRect();
+    if (r.top < 70 || r.bottom > innerHeight - 20) {
+      // tall parts line up with the top; short ones sit in the middle, clear of the card
+      const y = r.height > innerHeight * 0.55 ? scrollY + r.top - 16 : scrollY + r.top - innerHeight * 0.3;
+      window.scrollTo({top: Math.max(0, y), behavior: 'instant'});
+    }
+    place();
+    $('#tour-card [data-tour="next"]').focus({preventScroll: true});
+  }
+  function place() {
+    if (!TOUR.on) return;
+    const t = target(TOUR.steps[TOUR.i]); if (!t) return;
+    const r = t.getBoundingClientRect(), pad = 6, sp = $('#tour-spot'), c = $('#tour-card');
+    const vw = innerWidth, vh = innerHeight;
+    // the spotlight stays inside the window, so a tall part still reads as one shape
+    const top = Math.max(4, r.top - pad), bot = Math.min(vh - 4, r.bottom + pad);
+    sp.style.left = (r.left - pad) + 'px'; sp.style.top = top + 'px';
+    sp.style.width = (r.width + pad * 2) + 'px'; sp.style.height = Math.max(0, bot - top) + 'px';
+    const cw = c.offsetWidth, ch = c.offsetHeight, gap = 14; let x, y;
+    if (vw < 640) { c.classList.add('dock'); c.classList.toggle('top', (top + bot) / 2 > vh / 2); return; }
+    c.classList.remove('dock', 'top');
+    const below = bot + gap + ch <= vh - 8, above = top - gap - ch >= 8;
+    if (below || above) {
+      y = below ? bot + gap : top - gap - ch;
+      x = r.left + r.width / 2 - cw / 2;
+    } else if (r.left - cw - gap >= 8 || r.right + gap + cw <= vw - 8) {   // tall part: sit beside it
+      y = Math.max(8, Math.min(vh - ch - 8, top + 24));
+      x = r.right + gap + cw <= vw - 8 ? r.right + gap : r.left - cw - gap;
+    } else {                                                               // wide and tall: inside its lower corner
+      y = vh - ch - 24; x = r.right - cw - 24;
+    }
+    x = Math.max(8, Math.min(vw - cw - 8, x));
+    c.style.left = x + 'px'; c.style.top = y + 'px';
+  }
+
+  // ---------------------------------------------------------------- wiring
+  function mount() {
+    const root = document.createElement('div');
+    root.id = 'intro'; root.className = 'hidden';
+    root.setAttribute('role', 'dialog'); root.setAttribute('aria-modal', 'true'); root.setAttribute('aria-labelledby', 'intro-h');
+    document.body.appendChild(root);
+    const dl = $('.mast .dayline');
+    if (dl) {
+      const s = document.createElement('span'); s.id = 'intro-links'; s.className = 'intro-links';
+      s.innerHTML = '<button type="button" id="intro-open">About this demo</button><span aria-hidden="true">·</span><button type="button" id="intro-tour">Take the tour</button>' +
+        (VIDEO.has ? '<span aria-hidden="true">·</span><button type="button" id="intro-watch" class="watch-link">' + PLAY_ICON + 'Watch the video</button>' : '');
+      dl.appendChild(s);
+    }
+    root.addEventListener('click', e => {
+      const st = e.target.closest('[data-intro-start]');
+      if (e.target.id !== 'intro' && !st) return;
+      const want = !!(st && $('#tour-on') && $('#tour-on').checked);
+      close(want);
+    });
+    root.addEventListener('change', e => { if (e.target.id === 'tour-on') store.set('tour', e.target.checked ? 'on' : 'off'); });
+    document.addEventListener('click', e => {
+      if (e.target.closest('#intro-open')) open();
+      else if (e.target.closest('#intro-tour')) tourStart();
+      else if (e.target.closest('#intro-watch')) { tourEnd(); VIDEO.open(); }
+      else if (e.target.closest('[data-watch]')) { close(false); VIDEO.open(); }
+    });
+    // capture, so Escape ends the tour or closes the intro before the page's own Escape runs
+    document.addEventListener('keydown', e => {
+      if (!$('#intro').classList.contains('hidden')) {
+        if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); close(false); }
+        return;
+      }
+      if (!TOUR.on) return;
+      if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); tourEnd(); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(TOUR.i + 1, 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); show(TOUR.i - 1, -1); }
+    }, true);
+    window.addEventListener('resize', place);
+    window.addEventListener('scroll', place, {passive: true});
+    let force = false; try { force = new URLSearchParams(location.search).has('intro'); } catch (e) {}
+    if (force || store.get('intro-seen') !== '1') open();
+  }
+  (function wait() {
+    if (D && CL.length && !$('#main').classList.contains('hidden')) mount(); else setTimeout(wait, 60);
+  })();
+  return {open, close, start: tourStart, end: tourEnd, state: () => ({intro: !$('#intro').classList.contains('hidden'), on: TOUR.on, i: TOUR.i, n: TOUR.steps.length, wanted: tourWanted()}), steps: () => steps().map(s => s.t)};
+})();
+window.__sixtyTour = INTRO;
+
 })();
 </script>
 </body>
