@@ -1069,7 +1069,7 @@ body.vid-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#vid .vtrack,#vid .vknob,#vid .vbig{transition:none}}
 @media print{#vid{display:none!important}}
 </style>
-<script>window.__SIXTY_VIDEO__={"src": "media/sixty-video.mp4", "poster": "media/sixty-video-poster.jpg", "duration": 252.01, "chapters": [{"t": 14.5, "name": "The Morning"}, {"t": 47.0, "name": "One number"}, {"t": 59.0, "name": "Ask Sixty"}, {"t": 73.5, "name": "Scenario"}, {"t": 87.0, "name": "The Community"}, {"t": 111.0, "name": "One door"}, {"t": 129.5, "name": "Send"}, {"t": 145.5, "name": "Share"}, {"t": 158.0, "name": "The Market"}, {"t": 167.5, "name": "The Calendar"}, {"t": 181.5, "name": "Explore"}, {"t": 203.0, "name": "Reports"}, {"t": 222.5, "name": "Three seats"}], "sprite": {"src": "media/sixty-video-frames.jpg", "every": 2, "w": 192, "h": 108, "cols": 12, "n": 127}};</script>
+<script>window.__SIXTY_VIDEO__={"src": "media/sixty-video.mp4", "poster": "media/sixty-video-poster.jpg", "duration": 252.01, "chapters": [{"t": 14.5, "name": "The Morning"}, {"t": 47.0, "name": "One number"}, {"t": 59.0, "name": "Ask Sixty"}, {"t": 73.5, "name": "Scenario"}, {"t": 87.0, "name": "The Community"}, {"t": 111.0, "name": "One unit"}, {"t": 129.5, "name": "Send"}, {"t": 145.5, "name": "Share"}, {"t": 158.0, "name": "The Market"}, {"t": 167.5, "name": "The Calendar"}, {"t": 181.5, "name": "Explore"}, {"t": 203.0, "name": "Reports"}, {"t": 222.5, "name": "Three roles"}], "sprite": {"src": "media/sixty-video-frames.jpg", "every": 2, "w": 192, "h": 108, "cols": 12, "n": 127}};</script>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -1129,7 +1129,7 @@ body.vid-open{overflow:hidden}
   <section class="view on" id="v-morning"><div class="wrap">
     <div class="viewhead lifted">
       <h2>The Morning</h2>
-      <p class="lede">Every community and every unit on one map. Pick a number and the map shows the units behind it; zoom into a community and every unit is a door. The ranked list, with the reason attached, is below.</p>
+      <p class="lede">Every community and every unit on one map. Pick a number and the map shows the units behind it. Zoom into a community to see every unit. The ranked list, with the reason attached, is below.</p>
     </div>
     <div class="atlas" id="atlas">
       <aside class="layers" id="layers" role="radiogroup" aria-label="Show on the map"></aside>
@@ -1144,7 +1144,7 @@ body.vid-open{overflow:hidden}
     <div class="prairie" id="prairie"></div>
     <div class="thresholds" id="thresholds"></div>
     <div class="tscroll morningscroll"><table id="morning-table"></table></div>
-    <p class="note" style="font-size:12.5px;color:var(--ink-3);margin-top:10px">Communities with nothing above threshold sit at the bottom, and there are supposed to be a lot of them. Exposure counts units on notice and vacant, less pre-leased, over the next sixty days. Delinquency is the ledger balance as a share of this month's billed rent.</p>
+    <p class="note" style="font-size:12.5px;color:var(--ink-3);margin-top:10px">Communities with nothing above threshold are at the bottom, and most communities should be there. Exposure counts units on notice and vacant, less pre-leased, over the next sixty days. Delinquency is the ledger balance as a share of this month's billed rent.</p>
   </div></section>
 
   <section class="view" id="v-community"><div class="wrap"></div></section>
@@ -1177,7 +1177,7 @@ body.vid-open{overflow:hidden}
   <section class="view" id="v-reports"><div class="wrap">
     <div class="viewhead lifted">
       <h2>Reports</h2>
-      <p class="lede">Six standard reports, each one Explore with its settings applied, and the views you saved. Open one, schedule it, or take it away as a PDF, a deck or the rows.</p>
+      <p class="lede">Six standard reports, each one Explore with its settings applied, and the views you saved. Open one, schedule it, or download it as a PDF, a deck or the rows.</p>
     </div>
     <div id="reports-body"></div>
   </div></section>
@@ -1598,7 +1598,7 @@ function renderRegionMap(list, S) {
 let REASONS = {};
 function renderThresholds() {
   const f = (k, label, w) => '<label>' + label + '<input id="t-' + k + '" value="' + esc(T[k]) + '" inputmode="numeric" placeholder="' + (k === 'exposure' ? 'per market' : k === 'delinquency' ? '3.0' : '') + '"></label>';
-  $('#thresholds').innerHTML = f('exposure', 'Exposure target %') + f('delinquency', 'Delinquency target %') + f('renewWindow', 'Renewal window, days') + f('offerDays', 'Offer wait, days') + f('turnDays', 'Make-ready, days') + f('woDays', 'Work order, days') + '<span class="note">Thresholds are the only opinion on this page. Change one and the list re-sorts. Exposure targets default to 8% in Madison and 7% elsewhere.</span>';
+  $('#thresholds').innerHTML = f('exposure', 'Exposure target %') + f('delinquency', 'Delinquency target %') + f('renewWindow', 'Renewal window, days') + f('offerDays', 'Offer wait, days') + f('turnDays', 'Make-ready, days') + f('woDays', 'Work order, days') + '<span class="note">Thresholds are the only assumptions on this page. Change one and the list re-sorts. Exposure targets default to 8% in Madison and 7% elsewhere.</span>';
   $$('#thresholds input').forEach(inp => inp.addEventListener('change', () => { const k = inp.id.slice(2); const v = inp.value.trim(); T[k] = (k === 'exposure' || k === 'delinquency') ? (v === '' ? '' : +v) : (+v || T[k]); renderMorning(); }));
 }
 function renderMorning() {
@@ -1875,7 +1875,7 @@ function renderUnitGrid() {
   const list = visible();
   const S = list.map(stats);
   const R = list.map((c, i) => reasons(c, S[i]));
-  let h = '<div class="viewhead"><h2>The Unit</h2><p class="lede">Pick a community, then a door. Every figure on this page is exact, nothing rounded.</p></div>';
+  let h = '<div class="viewhead"><h2>The Unit</h2><p class="lede">Pick a community, then a unit. Every figure on this page is exact, with no rounding.</p></div>';
   h += '<div class="unitgrid">' + list.map((c, i) => {
     const s = S[i]; const rs = R[i];
     const status = rs.some(r => r.level === 'hot') ? 'hot' : rs.length ? 'watch' : 'clear';
@@ -1892,7 +1892,7 @@ function renderUnitGrid() {
 function renderUnitPicker(cid) {
   const c = C[cid]; const s = stats(c);
   let h = '<div class="crumbs"><button data-go="unit/all">The Unit</button><span>/</span>' + esc(c.name) + '</div>';
-  h += '<div class="viewhead"><div class="vh-with-ph">' + photoImg(c, 'vh-ph', true) + '<div><h2>' + esc(c.name) + '</h2><div class="eyebrow" style="margin-top:8px">' + esc(c.city) + ' · PM ' + esc(c.property_manager) + ' · ' + fmt(s.units) + ' units</div></div></div><p class="lede">Pick a door.</p></div>';
+  h += '<div class="viewhead"><div class="vh-with-ph">' + photoImg(c, 'vh-ph', true) + '<div><h2>' + esc(c.name) + '</h2><div class="eyebrow" style="margin-top:8px">' + esc(c.city) + ' · PM ' + esc(c.property_manager) + ' · ' + fmt(s.units) + ' units</div></div></div><p class="lede">Pick a unit.</p></div>';
   h += unitList(c, s, 'all');
   $('#v-unit .wrap').innerHTML = h;
   bindTips($('#v-unit .wrap'));
@@ -1921,7 +1921,7 @@ function renderUnit(uid) {
   const g = u.ledger;
   let h = '<div class="crumbs"><button data-go="unit/all">The Unit</button><span>/</span><button data-go="unit/' + c.community_id + '">' + esc(c.name) + '</button><span>/</span>Unit ' + esc(u.unit) + '</div>';
   h += '<div class="viewhead"><div><h2>Unit ' + esc(u.unit) + '</h2><div class="eyebrow" style="margin-top:8px">' + esc(c.name) + ' · ' + esc(PLAN_LABEL[u.floor_plan] || u.floor_plan) + ' · ' + fmt(u.sqft) + ' sq ft · floor ' + String(u.unit).slice(0, 1) + '</div></div>' +
-    viewheadSend('One door. Exact figures, no rounding; this is where the sums come from.', c.name + ' · unit ' + u.unit, unitReportBody(u, c, l, compRent), c.community_id) + '</div>';
+    viewheadSend('One unit. Exact figures, no rounding. The totals on the other pages add up from figures like these.', c.name + ' · unit ' + u.unit, unitReportBody(u, c, l, compRent), c.community_id) + '</div>';
   const facts = [['Status', STATUS_LABEL[u.status] + (u.pre_leased === 1 ? ', pre-leased' : '')], ['Asking rent', money(u.asking_rent), 1], ['Comp median for this size', money(compRent) + ' <span class="sub">at ' + compPsf.toFixed(2) + '/sf</span>', 1], ['Against comps', (u.asking_rent >= compRent ? '+' : '') + pct(u.asking_rent - compRent, compRent) + '%', 1]];
   if (u.status.startsWith('vacant')) { facts.push(['Days vacant', String(u.days_vacant), 1]); if (u.status === 'vacant_turn') { facts.push(['Make-ready started', fmtDy(toDay(u.make_ready_start))], ['Make-ready due', fmtDy(toDay(u.make_ready_due))]); } if (u.scheduled_move_in) facts.push(['Scheduled move-in', fmtDy(toDay(u.scheduled_move_in)) + (u.status === 'vacant_turn' && toDay(u.make_ready_due) > toDay(u.scheduled_move_in) ? ' <span class="chip hot">turn is late</span>' : '')]); }
   h += '<div class="unit-top"><div class="facts">' + facts.map(f => '<div class="f"><div class="k">' + f[0] + '</div><div class="v' + (f[2] ? ' num' : '') + '">' + f[1] + '</div></div>').join('') + '</div>' + PLANS.card(u, c) + '</div>';
@@ -2251,7 +2251,7 @@ function renderMarket() {
   h += '<div class="panel wideband"><div class="cap"><span class="eyebrow">Rent per square foot · our asking (dot) against the comp set range (bar) and its median (tick)</span><div class="legend"><span><i style="background:var(--hot);border-radius:50%"></i>above every comp</span><span><i style="background:var(--oak);border-radius:50%"></i>inside the range</span><span><i style="background:var(--clear);border-radius:50%"></i>below every comp</span></div></div><svg viewBox="0 0 ' + W + ' ' + (y + 12) + '">' + axis + svg + '</svg></div>';
   // market medians
   h += '<div class="panel wideband"><div class="cap"><span class="eyebrow">By market · medians across the comp sets</span></div><div class="tscroll"><table><thead><tr><th>Market</th><th class="r">Communities</th><th class="r">Our units</th><th class="r">Our occupancy</th><th class="r">Our exposure</th><th class="r">Our asking /sf</th><th class="r">Comp median /sf</th><th class="r">Comp occupancy</th><th class="r">Comp exposure</th><th class="r">Comps offering weeks free</th></tr></thead><tbody>' +
-    markets.map(m => { const cs = list.map((c, i) => [c, S[i]]).filter(v => v[0].market === m); const st = cs.filter(v => v[0].lease_up !== 1); const ks = cs.flatMap(v => v[0].comps); const units = sum(cs, v => v[1].units), su = sum(st, v => v[1].units); return '<tr><td>' + esc(m) + (cs.length > st.length ? '<div class="sub">' + (cs.length - st.length) + ' in lease-up, excluded from occupancy and exposure</div>' : '') + '</td><td class="num r">' + cs.length + '</td><td class="num r">' + fmt(units) + '</td><td class="num r">' + pct(sum(st, v => v[1].residents), su) + '%</td><td class="num r">' + pct(sum(st, v => v[1].exposure), su) + '%</td><td class="num r">' + (sum(cs, v => v[1].askPsf * v[1].units) / units).toFixed(2) + '</td><td class="num r">' + median(ks.map(k => k.rent_psf)).toFixed(2) + '</td><td class="num r">' + median(ks.map(k => k.occupancy)).toFixed(1) + '%</td><td class="num r">' + median(ks.map(k => k.exposure)).toFixed(1) + '%</td><td class="num r">' + pct(ks.filter(k => k.concession_weeks > 0).length, ks.length, 0) + '%</td></tr>'; }).join('') + '</tbody></table></div><div class="note">Public context, for the reading and not from this data: Madison added 2,802 net apartments in 2025 with 5,837 under construction and vacancy at 6.2%; Milwaukee is forecast at 3.9% vacancy for 2026 with renewal conversion near 71% and only 8.5% of properties offering concessions.</div></div>';
+    markets.map(m => { const cs = list.map((c, i) => [c, S[i]]).filter(v => v[0].market === m); const st = cs.filter(v => v[0].lease_up !== 1); const ks = cs.flatMap(v => v[0].comps); const units = sum(cs, v => v[1].units), su = sum(st, v => v[1].units); return '<tr><td>' + esc(m) + (cs.length > st.length ? '<div class="sub">' + (cs.length - st.length) + ' in lease-up, excluded from occupancy and exposure</div>' : '') + '</td><td class="num r">' + cs.length + '</td><td class="num r">' + fmt(units) + '</td><td class="num r">' + pct(sum(st, v => v[1].residents), su) + '%</td><td class="num r">' + pct(sum(st, v => v[1].exposure), su) + '%</td><td class="num r">' + (sum(cs, v => v[1].askPsf * v[1].units) / units).toFixed(2) + '</td><td class="num r">' + median(ks.map(k => k.rent_psf)).toFixed(2) + '</td><td class="num r">' + median(ks.map(k => k.occupancy)).toFixed(1) + '%</td><td class="num r">' + median(ks.map(k => k.exposure)).toFixed(1) + '%</td><td class="num r">' + pct(ks.filter(k => k.concession_weeks > 0).length, ks.length, 0) + '%</td></tr>'; }).join('') + '</tbody></table></div><div class="note">Public context, not from this data: Madison added 2,802 net apartments in 2025 with 5,837 under construction and vacancy at 6.2%; Milwaukee is forecast at 3.9% vacancy for 2026 with renewal conversion near 71% and only 8.5% of properties offering concessions.</div></div>';
   $('#market-body').innerHTML = h;
 }
 
@@ -2522,7 +2522,7 @@ function scenarioCounts(tOverride) {
 }
 function renderScenarioModal() {
   SCEN_T = {}; Object.keys(T).forEach(k => SCEN_T[k] = T[k] === '' ? (k === 'exposure' ? 8 : k === 'delinquency' ? 3 : 0) : T[k]);
-  let h = '<h3>Scenario</h3><p class="m-lede">Try tighter or looser thresholds against the portfolio as it stands this morning, then apply them if they read right. Nothing here changes the underlying data.</p>';
+  let h = '<h3>Scenario</h3><p class="m-lede">Try tighter or looser thresholds against the portfolio as it stands this morning, then apply them if they look right. Nothing here changes the underlying data.</p>';
   h += '<div class="scen-presets"><button class="pillbtn" id="scen-tighten" type="button">Tighten thresholds</button><button class="pillbtn" id="scen-loosen" type="button">Loosen thresholds</button><button class="pillbtn" id="scen-reset" type="button">Reset to current</button></div>';
   h += '<div class="scen-fields">' + SCEN_FIELDS.map(([k, label]) => '<label>' + label + '<input data-sf="' + k + '" value="' + SCEN_T[k] + '"></label>').join('') + '</div>';
   h += '<div class="scen-compare" id="scen-compare"></div>';
@@ -2958,7 +2958,7 @@ function renderCard() {
     h += '<div class="mc-why">' + (rs.length ? rs.map(x => '<div class="r"><span class="chip ' + x.level + '">' + esc(x.kind) + '</span>' + x.html + '</div>').join('') : '<div class="r"><span class="chip clear">Clear</span>nothing above threshold</div>') + '</div>';
     h += '<div class="mc-acts"><button class="btn-primary sm" type="button" data-go="community/' + c.community_id + '">Open the community</button>' +
       '<button class="pillbtn send" type="button" data-send-why="1" data-to="' + c.community_id + '" data-subject="' + esc(c.name + ' · this morning') + '" data-body="' + esc(whyPlainText(c, rs, s)) + '">Send</button></div>';
-    h += '<div class="mc-hint">' + (tierOf(ATL.engine ? gridWidthPx(c) : 0) === 'plan' ? 'Every cell is a door. Click one for the unit.' : 'Zoom in to see every unit as a door.') + '</div>';
+    h += '<div class="mc-hint">' + (tierOf(ATL.engine ? gridWidthPx(c) : 0) === 'plan' ? 'Every cell is a unit. Click one to open it.' : 'Zoom in to see every unit.') + '</div>';
     if (hot) card.classList.add('hot'); else card.classList.remove('hot');
   }
   card.innerHTML = h; card.classList.remove('hidden');
@@ -3756,7 +3756,7 @@ const SHARE = (function () {
       (S.how === 'email' ? '<div class="rr"><span>To</span><div><b>' + sel.length + ' ' + (sel.length === 1 ? 'recipient' : 'recipients') + '</b><br><span class="rr-sub">' + esc(sel.slice(0, 4).map(r => r.name).join(', ')) + (sel.length > 4 ? ' and ' + (sel.length - 4) + ' more' : '') + '</span></div></div>' : '') +
       (S.how === 'email' && S.msg ? '<div class="rr"><span>Message</span><div>' + esc(S.msg) + '</div></div>' : '') +
       '<div class="rr"><span>Data</span><div><b>' + esc(SNAP()) + '</b><br><span class="rr-sub">Synthetic, an invented company</span></div></div></div>' +
-      '<div class="snote"><b>Nothing is actually sent.</b> This is a demonstration. ' + (S.how === 'download' ? 'The download is real; it saves to this device.' : 'Choosing send records it in the Sent log and stops.') + '</div>';
+      '<div class="snote"><b>Nothing is sent.</b> This is a demonstration. ' + (S.how === 'download' ? 'The download is real; it saves to this device.' : 'Choosing send records it in the Sent log and stops.') + '</div>';
   }
   function stepDone() {
     const s = S.sent || {};
@@ -3870,7 +3870,7 @@ function shareItems(ctx) {
   if (ctx === 'reports' || VIEW === 'reports') list.push({k: 'reports', t: 'Reports, ' + whoLabel(WHO).replace(/^The Director · /, ''), d: 'The six standard reports and your saved views, each with its figure today.', build: () => numberPages(exReportsSlides()), csv: () => exReportsCsv()});
   const cc = CUR_C && C[CUR_C];
   if ((ctx === 'unit' || ctx === 'answer' || ctx === 'community') && CUR_U && U[CUR_U] && VIEW === 'unit')
-    list.push({k: 'unit', t: 'Unit ' + U[CUR_U].unit + ', ' + C[U[CUR_U].community_id].name, d: 'The door, the lease, the ledger and the work orders.', build: deck(['unit']), csv: () => csvSet(['unit'])});
+    list.push({k: 'unit', t: 'Unit ' + U[CUR_U].unit + ', ' + C[U[CUR_U].community_id].name, d: 'The unit, the lease, the ledger and the work orders.', build: deck(['unit']), csv: () => csvSet(['unit'])});
   if (cc && (VIEW === 'community' || VIEW === 'unit' || ctx === 'community'))
     list.push({k: 'community', t: cc.name, d: 'Its numbers, why it is on the list, and every unit on its stacking plan.', build: deck(['cover', 'community', 'stacking']), csv: () => csvSet(['community', 'cunits'])});
   list.push({k: 'morning', t: 'The Morning, ' + whoLabel(WHO).replace(/^The Director · /, ''), d: 'The six numbers, the map, and every community ranked by what needs attention, with the reason.', build: deck(['cover', 'numbers', 'map', 'ranked']), csv: () => csvSet(['communities', 'needs'])});
@@ -4033,7 +4033,7 @@ const SLIDES = {
   stacking() {
     const c = C[CUR_C], pl = plan(c), s0 = stats(c);
     const UC = unitCats([c], [s0]); const P = UC.P.units, N = UC.P.needs;
-    const s = dkSlide(c.name + ' · stacking plan', 'Every unit, floor by floor', 'Each cell is a door: color is its status today; a red or gold corner means it sits behind a reason on the list.');
+    const s = dkSlide(c.name + ' · stacking plan', 'Every unit, floor by floor', 'Each cell is a unit: color is its status today; a red or gold corner means it sits behind a reason on the list.');
     const X0 = DM_ + 26, Y0 = 150, AW = DW - 300, AH = 460;
     const sc = Math.min(AW / pl.wM, AH / pl.hM), cw = CELL_W * sc, ch = CELL_H * sc, g = Math.max(1, cw * .1);
     const colOf = {occupied: DK.OCC, notice: DK.WATCH, pre: DK.CLEAR, ready: DK.READY, turn: DK.HOT};
@@ -5156,11 +5156,11 @@ const INTRO = (function () {
         '<h2 id="intro-h">Which of your ' + F.n + ' communities need you first?</h2></div>' +
       '</div>' +
       '<div class="ibd">' +
-        '<p>You run property management for <b>Kettle Moraine Residential</b>: ' + F.n + ' communities and ' + fmt(F.units) + ' apartments in ' + esc(andList(F.markets)) + '. Leasing, rent, renewals, work orders and the market reports are all in your systems already. What they don\'t tell you is where to look first.</p>' +
+        '<p>You run property management for <b>Kettle Moraine Residential</b>: ' + F.n + ' communities and ' + fmt(F.units) + ' apartments in ' + esc(andList(F.markets)) + '. Leasing, rent, renewals, work orders and the market reports are all in your systems already. They don\'t show you where to look first.</p>' +
         '<p>This page ranks every community by what needs attention in the next sixty days, and says why, down to the unit. As of ' + esc(F.through) + ', <b>' + F.hot + ' need you</b>, ' + F.watch + ' are worth watching and ' + F.clear + ' are clear.</p>' +
         '<div class="icols"><div><h4>What you\'ll find</h4><ul>' +
           '<li><b>The Morning:</b> every community on a map and in one ranked list, with the reason written out.</li>' +
-          '<li><b>The Community</b> and <b>The Unit:</b> one property, then one door, its lease and its ledger.</li>' +
+          '<li><b>The Community</b> and <b>The Unit:</b> one property, then one unit, with its lease and ledger.</li>' +
           '<li><b>The Market</b> and <b>The Calendar:</b> comps that moved since yesterday, and 120 days of move-ins and move-outs.</li>' +
           '<li><b>Explore</b> and <b>Reports:</b> your own questions, saved and scheduled.</li></ul></div>' +
         '<div><h4>Try this</h4><ul>' +
@@ -5201,19 +5201,19 @@ const INTRO = (function () {
         b: 'See the page as you, a regional or one property manager. Everything narrows to the communities that person looks after.'},
       {sel: '#ask-host', t: 'Ask Sixty',
         b: 'Type a community, a unit number or a report name, and jump straight to it.'},
-      {sel: '#layers', t: 'The numbers that matter',
+      {sel: '#layers', t: 'The headline numbers',
         b: 'Each one says whether it\'s on target. Pick one and the map shows the units behind it.'},
       {sel: '#mapbox', t: 'The map',
-        b: 'Every community, colored by how it\'s doing. Hover for a photo and the reasons. Zoom in far enough and every unit is a door you can open.'},
+        b: 'Every community, colored by how it\'s doing. Hover for a photo and the reasons. Zoom in far enough to open any unit.'},
       {sel: '#prairie', t: 'The prairie line',
         b: 'One bar per community: how much of it could sit empty in the next sixty days. The tick is its target.'},
       {sel: '#thresholds', t: 'Your thresholds',
-        b: 'These are the only opinions on the page. Change one and the list re-sorts.'},
+        b: 'These are the only assumptions on the page. Change one and the list re-sorts.'},
       {sel: '#morning-table tbody tr:first-child', t: 'The list',
         b: 'Every community once, ranked. The reason is written out, and the underlined parts open the rows behind it. Click a name to open the community.'},
       {sel: '#share-btn', alt: '#nav-toggle', t: 'Share or download',
-        b: 'Save any view as a PDF, PowerPoint or spreadsheet, or send a quick report. In this demo, nothing is actually sent.',
-        ab: 'It\'s in this menu, under the views. Save any view as a PDF, PowerPoint or spreadsheet, or send a quick report. In this demo, nothing is actually sent.'},
+        b: 'Save any view as a PDF, PowerPoint or spreadsheet, or send a quick report. In this demo, nothing is sent.',
+        ab: 'It\'s in this menu, under the views. Save any view as a PDF, PowerPoint or spreadsheet, or send a quick report. In this demo, nothing is sent.'},
       {sel: '#intro-links', t: 'Come back any time',
         b: VIDEO.has ? 'Open the intro again, take this tour again, or watch the video, from here.' : 'Open the intro again, or take this tour again, from here.'}
     ];
